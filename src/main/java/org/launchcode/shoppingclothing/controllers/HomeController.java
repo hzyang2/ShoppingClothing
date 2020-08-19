@@ -10,6 +10,6 @@ public class HomeController {
     @RequestMapping(value = "")
     @ResponseBody
     public String index(){
-        return "Hello World";
+        return "Good Morning";
     }
 }
