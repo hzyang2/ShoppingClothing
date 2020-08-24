@@ -1,9 +1,30 @@
 .body-content {
     margin-top: 72px; /* This is probably here to fix the problem caused by the navbar-header css class. */
 }
+
 .body-content div {
     margin-top: 12px;
     margin-bottom: 10px;
+}
+
+.dot-wrapper {
+    text-align: right;
+}
+
+.dot {
+    display: inline-block;
+}
+
+
+#g-search-button {
+  display: inline-block;
+  width: 160px;
+  height: 16px;
+  position: relative;
+  left: -22px;
+  top: 3px;
+
+  background-color: black;  /* Replace with your own image */
 }
 
 td, th {
@@ -103,7 +124,7 @@ body {
         background: #2f3640;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: right;
         transition: 0.4s;
         color: white;
         cursor: pointer;

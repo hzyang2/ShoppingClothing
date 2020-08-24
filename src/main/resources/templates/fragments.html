@@ -7,6 +7,7 @@
     <link th:href="@{/css/techjobs.css}" rel="stylesheet" />
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="images/favicon.png">
 
     <title th:text="'Shoppingclothing' + ${title == null ? '' : ' :: ' + title}">Shopping Clothing</title>
 </head>
@@ -29,18 +30,26 @@
             </ul>
         </div>
     </div>
-    <div style="float: right;">
-        <div style="display: block;">
-            <input type="text" name="name" style="width:200px;" placeholder="Type to search" />
-            <a class="search-btn" href="#">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </a>
-            <a>
-                <i class="fa fa-shopping-cart" style="font-size:36px;"></i>
-            </a>
+    <div class="dot-wrapper">
+        <div class="dot">
+           <input type="text" name="name" style="width:350px; height:40px; margin:10px" placeholder="Type to search"/>
+        </div>
+        <div class="dot">
+           <a th:href="@{/searchbtn}" class="search-btn" href="#">
+               <i class="fa fa-search" aria-hidden="true" style="margin:-50px"></i>
+           </a>
+        </div>
+        <div class="dot">
+           <a th:href="@{/shoppingcart}">
+               <i class="fa fa-shopping-cart" style="font-size:36px; margin:10px"></i>
+           </a>
+        </div>
+        <div class="dot">
+           <a th:href="@{/usericon}">
+               <i class="fa fa-user icon" style="font-size:36px; margin:10px"></i>
+           </a>
         </div>
     </div>
 </div>
-
 </body>
 </html>
