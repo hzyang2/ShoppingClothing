@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+
+<head th:fragment="head">
+
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/techjobs.css}" rel="stylesheet" />
+    <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title th:text="'Shoppingclothing' + ${title == null ? '' : ' :: ' + title}">Shopping Clothing</title>
+</head>
+
+<body>
+
+<!--<div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">-->
+<div th:fragment="page-header">
+    <div class="navbar-header" style="margin-left:50px">
+        <a th:href="@{/}" class="navbar-brand" ><strong>Shopping</strong><em>Clothing</em></a>
+    </div>
+    <div class="container">
+        <div class="navbar-collapse collapse" style="margin-left:250px">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/man}">Man</a></li>
+                <li><a th:href="@{/woman}">Woman</a></li>
+                <li><a th:href="@{/baby}">Baby</a></li>
+                <li><a th:href="@{/boy}">Boy</a></li>
+                <li><a th:href="@{/girl}">Girl</a></li>
+            </ul>
+        </div>
+    </div>
+    <div style="float: right;">
+        <div style="display: block;">
+            <input type="text" name="name" style="width:200px;" placeholder="Type to search" />
+            <a class="search-btn" href="#">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+            <a>
+                <i class="fa fa-shopping-cart" style="font-size:36px;"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

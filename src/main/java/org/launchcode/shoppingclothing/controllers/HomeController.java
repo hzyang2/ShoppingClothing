@@ -1,15 +1,17 @@
 package org.launchcode.shoppingclothing.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
 
     @RequestMapping(value = "")
-    @ResponseBody
-    public String index(){
-        return "Good Morning";
+    public String displayAllClothes(Model model){
+        model.addAttribute("title","All Clothes");
+//        model.addAttribute("clothes",clothRepository.findAll());
+        return "index";
     }
 }
