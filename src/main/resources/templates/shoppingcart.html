@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body>
+
+    <h1 th:href="@{/css/techjobs.css}">Welcome, Shopping Cart!</h1>
+
+    <div th:replace="fragments :: page-header"></div>
+
+    <h2 style="margin:50px">Item</h2>
+    <div class="grid a">
+        <div class="grid-item aa">
+            <img src="/image/baby/baby1.webp" style="width:300px;height:170px; margin-left:50px">
+        </div>
+        <div class="grid-item ab">
+            <div>Brand:</div>
+            <div>Category:</div>
+            <div>Size:</div>
+        </div>
+        <div class="grid-item ac">
+            <div class="price">Price</div>
+            <div>
+                <input type="text" name="price" class="pricebox"/>
+            </div>
+        </div>
+        <div class="grid-item ad">
+            <div>Qty</div>
+            <div>
+                <input type="text" name="qty" class="qtybox"/>
+            </div>
+        </div>
+        <div class="grid-item ae">
+            <div>Subtotal</div>
+            <div>
+                <input type="text" name="subtotal" class="subtotalbox"/>
+            </div>
+        </div>
+    </div>
+    <div class="grid b">
+        <div class="summary">Summary</div>
+            <div class="grid-item-summary">
+                <div class="grid-item-summary a">
+                    <div class="grid-item-summary-detail">Subtotal</div>
+                    <div class="grid-item-summary-detail">Shipping</div>
+                    <div class="grid-item-summary-detail">Order Total</div>
+                </div>
+                <div class="grid-item-summary b">
+                    <div>
+                        <input type="text" name="summarysubtotal" class="summarysubtotalbox"/>
+                    </div>
+                    <div>
+                        <input type="text" name="summaryshippingtotal" class="summaryshippingtotalbox"/>
+                    </div>
+                    <div>
+                        <input type="text" name="summaryordertotal" class="summaryordertotalbox"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="result">
+        <div class="result-item a">
+            <a th:href="@{/updateshoppingcart}" class="updateshoppingcart">Update Shopping Cart</a>
+        </div>
+        <div class="result-item b">
+            <a th:href="@{/proceedtocheckout}" class="proceedtocheckout">Proceed to Checkout</a>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

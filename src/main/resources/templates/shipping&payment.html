@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body>
+
+    <h1 th:href="@{/css/techjobs.css}">Welcome, Shipping and Payment!</h1>
+
+    <div th:replace="fragments :: page-header"></div>
+
+    <div>
+        <div class="shopping-item a">
+            <h2 class="shippingaddress">Shipping Address</h2>
+            <div>
+                <div class="first">First Name</div>
+                <input type="text" name="firstname" class="firstnamebox"/>
+                <div class="first">Last Name</div>
+                <input type="text" name="lastname" class="firstnamebox"/>
+                <div class="first">Street Address</div>
+                <input type="text" name="streetaddress" class="firstnamebox"/>
+                <div class="first">City</div>
+                <input type="text" name="city" class="firstnamebox"/>
+                <div class="first">State</div>
+                <input type="text" name="state" class="firstnamebox"/>
+                <div class="first">Zip/Postal Code</div>
+                <input type="text" name="zipcode" class="firstnamebox"/>
+                <div class="first">Phone Number</div>
+                <input type="text" name="phonenumber" class="firstnamebox"/>
+            </div>
+        </div>
+        <div class="shopping-item b">
+            <h2 class="paymentmethod">Payment Method</h2>
+            <div>
+                <div class="creditcard">Credit Card</div>
+                <div class="creditcardaddress">My billing and shipping address are the same</div>
+                <input type="text" name="creditcardaddress" class="creditcardaddressbox"/>
+                <div class="creditcardtype">Credit Card Type</div>
+                <div>
+                    <div class="creditcardtype-item a">Visa</div>
+                    <div class="creditcardtype-item b">MasterCard</div>
+                    <div class="creditcardtype-item c">Discovery</div>
+                </div>
+                <div class="creditcardtype">Credit Card Number</div>
+                <input type="text" name="creditcardnumber" class="creditcardnumberbox"/>
+                <div class="creditcardtype">Expiration Date</div>
+                    <div class="expirationdate-item a">
+                        <input type="text" name="expirationdatemonth" class="expirationdatemonthbox"/>
+                    </div>
+                    <div class="expirationdate-item b">
+                        <input type="text" name="expirationdateyear" class="expirationdateyearbox">
+                    </div>
+                <div class="creditcardtype">Card Verification Number</div>
+                    <input type="text" name="cardverificationnumber" class="cardverificationnumberbox">
+            </div>
+        </div>
+        <a th:href="@{/thanks}" class="placeorder">Place Order</a>
+    </div>
+</body>
+</html>

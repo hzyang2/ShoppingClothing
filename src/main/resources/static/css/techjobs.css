@@ -1,3 +1,8 @@
+/*body {
+    margin: 0;
+    padding: 0;
+}*/
+
 .body-content {
     margin-top: 72px; /* This is probably here to fix the problem caused by the navbar-header css class. */
 }
@@ -7,15 +12,106 @@
     margin-bottom: 10px;
 }
 
-.dot-wrapper {
-    text-align: right;
+body.div.div.ul.span{
+    font-size: 20px
 }
 
 .dot {
     display: inline-block;
 }
 
+.dot-wrapper {
+    text-align: right;
+}
 
+/*.search-box{
+    position: absolute;
+    top: 21%;
+    left: 70%;
+    transform: translate(-50%,-50%);
+    /*background: #2f3640;*/
+   /* height: 70px;
+    border-radius: 100px;
+    padding: 20px;
+}
+
+.search-btn {
+    color: black;
+    float: right;
+    width: 40px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: right;
+    align-items:right;
+}
+
+.search-txt {
+    background: none;
+    float: right;
+    padding: 0;
+    color: black;
+    font-size: 16px;
+    transition: 0.4s;
+}*/
+
+
+div.dot-wrapper input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+div.dot-wrapper button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+
+div.dot-wrapper button:hover {
+  background: #0b7dda;
+}
+
+/* Clear floats */
+div.dot-wrapper::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+h1 {
+    color: blue;
+    text-align: center;
+}
+
+h2 {
+    color: black;
+    text-align: left;
+}
+
+li {
+    font-family;
+    font-size:20px;
+}
+
+strong {
+    font-size:40px;
+}
+
+em {
+    font-size:50px;
+}
+
+/*
 #g-search-button {
   display: inline-block;
   width: 160px;
@@ -25,7 +121,7 @@
   top: 3px;
 
   background-color: black;  /* Replace with your own image */
-}
+/*}
 
 td, th {
     padding: 10px;
@@ -86,11 +182,6 @@ div.job-listing {
     background-color: #e4e4e4;
 }
 
-h1 {
-    color: blue;
-    text-align: center;
-}
-
 body {
         margin: 0;
         padding: 0;
@@ -145,4 +236,4 @@ body {
         width: 0px;
         font-weight: bold;
       }
-    }
+    }*/
