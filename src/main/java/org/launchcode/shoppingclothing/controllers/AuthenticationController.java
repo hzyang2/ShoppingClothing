@@ -61,6 +61,30 @@ public class AuthenticationController {
             return "register";
         }
 
+//        User existingFirstname = userRepository.findByFirstname(registerFormDTO.getFirstname());
+//
+//        if (existingFirstname != null) {
+//            errors.rejectValue("firstname", "firstname.alreadyexists", "A firstname with that firstname already exists");
+//            model.addAttribute("title", "Register");
+//            return "register";
+//        }
+//
+//        User existingLastname = userRepository.findByLastname(registerFormDTO.getLastname());
+//
+//        if (existingLastname != null) {
+//            errors.rejectValue("lastname", "lastname.alreadyexists", "A lastname with that lastname already exists");
+//            model.addAttribute("title", "Register");
+//            return "register";
+//        }
+//
+//        User existingEmail = userRepository.findByEmail(registerFormDTO.getEmail());
+//
+//        if (existingEmail != null) {
+//            errors.rejectValue("email", "email.alreadyexists", "A email with that email already exists");
+//            model.addAttribute("title", "Register");
+//            return "register";
+//        }
+
         User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
 
         if (existingUser != null) {
@@ -71,12 +95,14 @@ public class AuthenticationController {
 
         String password = registerFormDTO.getPassword();
         String verifyPassword = registerFormDTO.getVerifyPassword();
+
         if (!password.equals(verifyPassword)) {
             errors.rejectValue("password", "passwords.mismatch", "Passwords do not match");
             model.addAttribute("title", "Register");
             return "register";
         }
 
+//        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getFirstname(), registerFormDTO.getLastname(), registerFormDTO.getEmail());
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
@@ -119,13 +145,13 @@ public class AuthenticationController {
 
         setUserInSession(request.getSession(), theUser);
 
-        return "index";
+        return "redirect:";
     }
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request){
         request.getSession().invalidate();
-        return "redirect:/index";
+        return "redirect:/login";
     }
 
 }

@@ -10,8 +10,6 @@ public class HomeController {
     @RequestMapping(value = "")
     public String displayAllClothes(Model model){
         model.addAttribute("title","All Clothes");
-//        model.addAttribute("clothes",clothRepository.findAll());
         return "index";
     }
-
 }

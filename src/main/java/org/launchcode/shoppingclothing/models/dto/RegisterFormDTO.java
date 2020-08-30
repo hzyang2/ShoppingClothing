@@ -17,17 +17,17 @@ public class RegisterFormDTO extends LoginFormDTO {
 
     @NotNull
     @NotBlank
-    @Size(min = 3, max = 20, message = "Invalid first name. Must be between 3 and 30 characters.")
+    @Size(min = 3, max = 20, message = "Invalid first name. Must be between 3 and 20 characters.")
     private String firstname;
 
     @NotNull
     @NotBlank
-    @Size(min = 3, max = 20, message = "Invalid last name. Must be between 3 and 30 characters.")
+    @Size(min = 3, max = 20, message = "Invalid last name. Must be between 3 and 20 characters.")
     private String lastname;
 
     @NotNull
     @NotBlank
-    @Size(min = 3, max = 20, message = "Invalid last name. Must be between 3 and 30 characters.")
+    @Size(min = 3, max = 20, message = "Invalid email. Must be between 3 and 20 characters.")
     private String email;
 
     public String getFirstname() {
@@ -46,11 +46,7 @@ public class RegisterFormDTO extends LoginFormDTO {
         this.lastname = lastname;
     }
 
-    public String getEmail() {
-        return email;
-    }
+    public String getEmail() { return email; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setEmail(String email) { this.email = email; }
 }
