@@ -21,12 +21,12 @@ public class RegisterFormDTO extends LoginFormDTO {
 
     @NotNull
     @NotBlank
-    @Size(min = 3, max = 20, message = "Invalid first name. Must be between 3 and 20 characters.")
+    @Size(min = 1, max = 20, message = "Invalid first name. Must be between 1 and 20 characters.")
     private String firstname;
 
     @NotNull
     @NotBlank
-    @Size(min = 3, max = 20, message = "Invalid last name. Must be between 3 and 20 characters.")
+    @Size(min = 1, max = 20, message = "Invalid last name. Must be between 1 and 20 characters.")
     private String lastname;
 
     @NotNull

@@ -120,7 +120,7 @@ public class AuthenticationController {
                                    Model model, @PathVariable int productId) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Log In");
-            return "login/0";
+            return "login";
         }
 
         User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
@@ -128,7 +128,7 @@ public class AuthenticationController {
         if (theUser == null) {
             errors.rejectValue("username", "user.invalid", "The given username does not exist");
             model.addAttribute("title", "Log In");
-            return "login/0";
+            return "login";
         }
 
         String password = loginFormDTO.getPassword();
@@ -136,7 +136,7 @@ public class AuthenticationController {
         if (!theUser.isMatchingPassword(password)) {
             errors.rejectValue("password", "password.invalid", "Invalid password");
             model.addAttribute("title", "Log In");
-            return "login/0";
+            return "login";
         }
 
         setUserInSession(request.getSession(), theUser);
@@ -148,7 +148,7 @@ public class AuthenticationController {
     @GetMapping("/logout")
     public String logout(HttpServletRequest request){
         request.getSession().invalidate();
-        return "redirect:/login/0";
+        return "redirect:/login";
     }
 
 }

@@ -29,6 +29,7 @@ public class ShoppingCartController {
     private UserRepository userRepository;
 
     private static final String userSessionKey = "user";
+
     private User getUserFromRequest(HttpServletRequest request) throws Exception {
         //TODO: Find a better way to get the session User object ---
         HttpSession session = request.getSession();
@@ -73,12 +74,9 @@ public class ShoppingCartController {
     @RequestMapping("shoppingcart")
     public String viewCart (HttpServletRequest request, Model model) throws Exception {
         User user = getUserFromRequest(request);
-        //TODO: findAllByUser instead of findAll()
-        Iterable<CartItem> cartItems = cartItemRepository.findAll();
+        Iterable<CartItem> cartItems = cartItemRepository.findAllByUser(user);
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("title", "Shopping Cart");
         return "shoppingcart";
     }
-
-
 }
