@@ -12,17 +12,20 @@
     <form method="post" style="margin:100px">
         <div class="form-group">
             <label style="padding-top:60px;" th:for="username">Username
-                <input class="form-control-username" th:field="${loginFormDTO.username}">
+                <input class="form-control-username-login" th:field="${loginFormDTO.username}">
             </label>
-            <p class="error" th:errors="${loginFormDTO.username}"></p>
+            <p class="error-username-login" th:errors="${loginFormDTO.username}"></p>
         </div>
         <div class="form-group">
             <label>Password
-                <input class="form-control-password" th:field="${loginFormDTO.password}" type="password">
+                <input class="form-control-password-login" th:field="${loginFormDTO.password}" type="password">
             </label>
-            <p class="error" th:errors="${loginFormDTO.password}"></p>
+            <p class="error-password-login" th:errors="${loginFormDTO.password}"></p>
         </div>
         <input type="submit" class="btn-primary" value="Log In" />
+        <div>
+            <p th:text="${loginFormDTO.productId}"></p>
+        </div>
     </form>
 
     <p style="margin:100px">Don't have an account? <a href="/register">Register for one.</a></p>

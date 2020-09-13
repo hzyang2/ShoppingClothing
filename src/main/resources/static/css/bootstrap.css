@@ -25,7 +25,7 @@
   width: 200px;
   height:40px;
   margin-top: 20px;
-  margin-left:180px;
+  margin-left:120px;
   font-size: 15px;
 }
 
@@ -98,7 +98,7 @@ fieldset[disabled] .btn-primary.focus {
 }
 
 .form-control {
-  margin-bottom: 15px;
+  margin-bottom: 0px;
   font-size: 20px;
   margin-left:0px;
   width: 300px;
@@ -106,28 +106,53 @@ fieldset[disabled] .btn-primary.focus {
 
 }
 
+.form-control-one {
+    margin-bottom: 25px;
+    font-size: 20px;
+    margin-left:0px;
+    width: 300px;
+    height:30px;
+}
+
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 0px;
   font-size: 20px;
   margin-left:12px;
 }
 
-.form-control-username {
+.form-control-username-login {
     width: 300px;
     height:30px;
     margin-left: 2px;
+    margin-bottom: 20px;
 }
 
-.form-control-password {
+.form-control-password-login {
     width: 300px;
     height:30px;
-    margin-left: 5px;
+    margin-left: 9px;
+    margin-bottom: 20px;
 }
 
 .error {
     color: red;
+    font-size: 14px;
+    margin-left: 8px;
 }
 
+.error-password-login {
+    margin-bottom: 40px;
+    color: red;
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+.error-username-login {
+    margin-bottom: 40px;
+    color: red;
+    font-size: 14px;
+    margin-left: 8px;
+}
 
 .has-error .help-block,
 .has-error .control-label,
@@ -201,16 +226,19 @@ fieldset[disabled] .btn-primary.focus {
 }
 
 .grid-item.aa {
+    width:200px;
+    height:170px;
+    margin-left:100px;
 }
 
 .grid-item.ab {
-   font-size: 20px;
-   margin-left:10px;
+   font-size: 15x;
+   margin-left:20px;
 }
 
 .grid-item.ac {
    font-size: 20px;
-   margin-left:10px;
+   margin-left:100px;
    text-align: center;
 }
 
@@ -218,11 +246,12 @@ fieldset[disabled] .btn-primary.focus {
     width: 100px;
     height: 30px;
     margin-left:150px;
+    text-align: left;
 }
 
 .grid-item.ad {
    font-size: 20px;
-   margin-left:10px;
+   margin-left:100px;
    text-align: center;
 }
 
@@ -233,7 +262,7 @@ fieldset[disabled] .btn-primary.focus {
 
 .grid-item.ae {
    font-size: 20px;
-   margin-left:10px;
+   margin-left:50px;
    text-align: center;
 }
 
@@ -243,8 +272,9 @@ fieldset[disabled] .btn-primary.focus {
 }
 
 .updateshoppingcart {
-    margin-top: 50px;
-    margin-left:700px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-left:600px;
     font-size: 25px;
     color: white;
     background-color: #2daee4;
@@ -252,8 +282,9 @@ fieldset[disabled] .btn-primary.focus {
 }
 
 .proceedtocheckout {
-    margin-top: 50px;
-    margin-left:150px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-left:270px;
     font-size: 25px;
     color: white;
     background-color: #2daee4;
@@ -291,10 +322,24 @@ fieldset[disabled] .btn-primary.focus {
     margin-top: 10px;
 }
 
+.shipping-price-number {
+
+}
+
 .summaryshippingtotalbox {
     width: 100px;
     height: 30px;
     margin-top: 10px;
+}
+
+.summarysubtotalbox-one {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.shipping-price {
+    margin-top: 20px;
+    margin-left: 40px;
 }
 
 .summaryordertotalbox {
@@ -302,6 +347,11 @@ fieldset[disabled] .btn-primary.focus {
     height: 30px;
     margin-top: 10px;
     margin-bottom: 25px;
+}
+
+.summaryordertotalbox-one {
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 .grid-item-summary-detail {
@@ -316,7 +366,8 @@ fieldset[disabled] .btn-primary.focus {
 }
 
 .price {
-    margin-left:150px;
+    margin-left:200px;
+    margin-left:0px;
 }
 
 .result {
@@ -331,11 +382,12 @@ fieldset[disabled] .btn-primary.focus {
 }
 
 .result-item.a {
-
+    margin-bottom: 40px;
+    margin-left:
 }
 
 .result-item.b {
-
+    margin-bottom: 40px;
 }
 
 .shippingaddress {
@@ -559,6 +611,55 @@ fieldset[disabled] .btn-primary.focus {
      font-size: 14px;
  }
 
+.product-item {
+    display: inline-block;
+}
+
+.addtocart {
+    margin-top: 100px;
+    margin-left:1000px;
+    font-size: 30px;
+    color: white;
+    background-color: #2daee4;
+    box-sizing: border-box;
+}
+
+.product-item-image {
+    width:450px;
+    height:300px;
+    margin-left:190px
+}
+
+.product-item.a {
+}
+
+.product-item.b {
+   vertical-align: top;
+   margin-left: 20px;
+   font-size: 20px;
+}
+
+.qty-input {
+    margin-top: 0px;
+    margin-left: 0px;
+    vertical-align: top;
+    text-align: center;
+    font-size: 15px;
+    width: 60px;
+    height: 35px;
+}
+
+.btn-primary-delete {
+  width: 60px;
+  height:30px;
+  margin-top: 5px;
+  margin-left:90px;
+}
+
+.price-p {
+    margin-top: 20px;
+    text-align: right;
+}
 
 /*
 .navbar-brand {

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,29 +62,13 @@ public class AuthenticationController {
             return "register";
         }
 
-//        User existingFirstname = userRepository.findByFirstname(registerFormDTO.getFirstname());
-//
-//        if (existingFirstname != null) {
-//            errors.rejectValue("firstname", "firstname.alreadyexists", "A firstname with that firstname already exists");
-//            model.addAttribute("title", "Register");
-//            return "register";
-//        }
-//
-//        User existingLastname = userRepository.findByLastname(registerFormDTO.getLastname());
-//
-//        if (existingLastname != null) {
-//            errors.rejectValue("lastname", "lastname.alreadyexists", "A lastname with that lastname already exists");
-//            model.addAttribute("title", "Register");
-//            return "register";
-//        }
-//
-//        User existingEmail = userRepository.findByEmail(registerFormDTO.getEmail());
-//
-//        if (existingEmail != null) {
-//            errors.rejectValue("email", "email.alreadyexists", "A email with that email already exists");
-//            model.addAttribute("title", "Register");
-//            return "register";
-//        }
+        User existingEmail = userRepository.findByEmail(registerFormDTO.getEmail());
+
+        if (existingEmail != null) {
+            errors.rejectValue("email", "email.alreadyexists", "A user with that email has already registered");
+            model.addAttribute("title", "Register");
+            return "register";
+        }
 
         User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
 
@@ -102,17 +87,22 @@ public class AuthenticationController {
             return "register";
         }
 
-//        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getFirstname(), registerFormDTO.getLastname(), registerFormDTO.getEmail());
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getEmail(),
+                                registerFormDTO.getFirstname(), registerFormDTO.getLastname());
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
 
         return "redirect:";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/login") //*** Site should support normal login without unauthenticated Add to Cart.
     public String displayLoginForm(Model model) {
-        model.addAttribute(new LoginFormDTO());
+        return displayLoginForm(model, 0);
+    }
+
+    @GetMapping("/login/{productId}")
+    public String displayLoginForm(Model model, @PathVariable int productId) {
+        model.addAttribute(new LoginFormDTO(productId));
         model.addAttribute("title", "Log In");
         return "login";
     }
@@ -121,10 +111,16 @@ public class AuthenticationController {
     public String processLoginForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
                                    Errors errors, HttpServletRequest request,
                                    Model model) {
+        return processLoginForm(loginFormDTO, errors, request, model,0);
+    }
 
+    @PostMapping("/login/{productId}")
+    public String processLoginForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
+                                   Errors errors, HttpServletRequest request,
+                                   Model model, @PathVariable int productId) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Log In");
-            return "login";
+            return "login/0";
         }
 
         User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
@@ -132,7 +128,7 @@ public class AuthenticationController {
         if (theUser == null) {
             errors.rejectValue("username", "user.invalid", "The given username does not exist");
             model.addAttribute("title", "Log In");
-            return "login";
+            return "login/0";
         }
 
         String password = loginFormDTO.getPassword();
@@ -140,18 +136,19 @@ public class AuthenticationController {
         if (!theUser.isMatchingPassword(password)) {
             errors.rejectValue("password", "password.invalid", "Invalid password");
             model.addAttribute("title", "Log In");
-            return "login";
+            return "login/0";
         }
 
         setUserInSession(request.getSession(), theUser);
 
-        return "redirect:";
+        var prodId = loginFormDTO.getProductId();
+        return (prodId > 0) ? "redirect:/AddToCart/" + prodId : "redirect:/";
     }
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request){
         request.getSession().invalidate();
-        return "redirect:/login";
+        return "redirect:/login/0";
     }
 
 }

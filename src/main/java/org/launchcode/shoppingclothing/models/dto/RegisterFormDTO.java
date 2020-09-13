@@ -15,6 +15,10 @@ public class RegisterFormDTO extends LoginFormDTO {
         this.verifyPassword = verifyPassword;
     }
 
+//    public RegisterFormDTO (int prodId) {
+//        super(prodId);
+//    }
+
     @NotNull
     @NotBlank
     @Size(min = 3, max = 20, message = "Invalid first name. Must be between 3 and 20 characters.")

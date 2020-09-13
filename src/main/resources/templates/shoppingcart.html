@@ -10,32 +10,40 @@
 
     <h2 style="margin:50px">Item</h2>
     <div class="grid a">
-        <div class="grid-item aa">
-            <img src="/image/baby/baby1.webp" style="width:300px;height:170px; margin-left:50px">
-        </div>
-        <div class="grid-item ab">
-            <div>Brand:</div>
-            <div>Category:</div>
-            <div>Size:</div>
-        </div>
-        <div class="grid-item ac">
-            <div class="price">Price</div>
-            <div>
-                <input type="text" name="price" class="pricebox"/>
-            </div>
-        </div>
-        <div class="grid-item ad">
-            <div>Qty</div>
-            <div>
-                <input type="text" name="qty" class="qtybox"/>
-            </div>
-        </div>
-        <div class="grid-item ae">
-            <div>Subtotal</div>
-            <div>
-                <input type="text" name="subtotal" class="subtotalbox"/>
-            </div>
-        </div>
+        <table>
+            <tr th:each="cartItem : ${cartItems}">
+                <td>
+                    <img th:src="${'/image/' + cartItem.product.product_line + '/' + cartItem.product.image_file_name}" class="grid-item aa">
+                </td>
+                <td class="grid-item ab">
+                    <p th:text="${'Brand: ' + cartItem.product.brand}"></p>
+                    <p th:text="${'Category: ' + cartItem.product.category}"></p>
+                    <p th:text="${'Size: ' + cartItem.product.size}"></p>
+                </td>
+                <td class="grid-item ac">
+                    Price
+                    <p class="price-p">
+                        $<span class="price" th:data-cartitemid="${cartItem.id}" th:text="${cartItem.product.price}"></span>
+                    </p>
+                </td>
+                <td class="grid-item ad">
+                    Qty
+                    <p><input type="text" th:data-cartitemid="${cartItem.id}" id="qty" name="qty[]" th:value="${cartItem.qty}" class="qty-input"/></p>
+                </td>
+                <td class="grid-item ae">
+                    Extended Price
+                    <p>
+                        $<span class="xprice" th:data-cartitemid="${cartItem.id}" th:text="${cartItem.product.price*cartItem.qty}"></span>
+                    </p>
+<!--                    <p class="subtotal" th:data-cartitemid="${cartItem.Id}" th:text="${cartItem.product.price*cartItem.qty}"></p>-->
+                    <form class="btn-primary-delete">
+                        <a th:href="${'/deleteItem/' + cartItem.id}">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </form>
+                </td>
+            </tr>
+        </table>
     </div>
     <div class="grid b">
         <div class="summary">Summary</div>
@@ -46,32 +54,70 @@
                     <div class="grid-item-summary-detail">Order Total</div>
                 </div>
                 <div class="grid-item-summary b">
-                    <div>
-                        <input type="text" name="summarysubtotal" class="summarysubtotalbox"/>
+                    <div class="summarysubtotalbox-one">
+                        $<span type="number" class="summarysubtotalbox" id="result" ></span>
+<!--                        <input type="text" name="summarysubtotal" class="summarysubtotalbox"/>-->
                     </div>
-                    <div>
-                        <input type="text" name="summaryshippingtotal" class="summaryshippingtotalbox"/>
+                    <div class="shipping-price">
+                        $<span type="number" class="shipping-price-number" id="shippingPrice">3.25</span>
+<!--                        <input type="text" name="summaryshippingtotal" class="summaryshippingtotalbox"/>-->
                     </div>
-                    <div>
-                        <input type="text" name="summaryordertotal" class="summaryordertotalbox"/>
+                    <div class="summaryordertotalbox-one">
+                        $<span type="number" class="summaryordertotalbox" id="grandTotal"></span>
+<!--                        <input type="text" name="summaryordertotal" class="summaryordertotalbox"/>-->
                     </div>
                 </div>
             </div>
         </div>
     <div class="result">
         <div class="result-item a">
-            <a th:href="@{/updateshoppingcart}" class="updateshoppingcart">Update Shopping Cart</a>
-<!--            <form>-->
-<!--            <input type="submit" class="btn-primary-shoppingcart" value="Update Shopping Cart" />-->
+            <a th:href="@{/shoppingcart}" class="updateshoppingcart">Update Shopping Cart</a>
+<!--            <form th:href="@{/shoppingcart}">-->
+<!--                <input type="submit" class="btn-primary-shoppingcart" value="Update Shopping Cart" />-->
 <!--            </form>-->
         </div>
         <div class="result-item b">
             <a th:href="@{/proceedtocheckout}" class="proceedtocheckout">Proceed to Checkout</a>
-<!--            <form method="post">-->
-<!--            <input type="submit" class="btn-primary-checkout" value="Proceed to Checkout" />-->
+<!--            <form method="post" th:href="@{/proceedtocheckout}">-->
+<!--                <input type="submit" class="btn-primary-checkout" value="Proceed to Checkout" />-->
 <!--            </form>-->
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+$(document).ready(calculateSum);
 
+<!--$.fn.digits = function(){-->
+<!--    return this.each(function(){-->
+<!--        $(this).text( $(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") );-->
+<!--    })-->
+<!--}-->
+
+$("input[data-cartitemid]").change(function() {
+    var cartItemId = $(this).data("cartitemid")
+    var price = $('span.price[data-cartitemid="' + cartItemId + '"]')[0].innerText
+    var qty = this.value
+    $('span.xprice[data-cartitemid="' + cartItemId + '"]')[0].innerText=(price * qty).toFixed(2)
+    calculateSum()
+});
+
+function calculateSum() {
+    var sum = 0;
+    //iterate through each td based on class and add the values
+    $(".xprice").each(function() {
+        //add only if the value is number
+        if(!isNaN(this.innerText) && this.innerText.length!=0) {
+            sum += parseFloat(this.innerText);
+        }
+    });
+    $('#result').text(sum.toFixed(2));
+
+    var shippingPriceOne = $('#shippingPrice').text();
+    var grandTotal = parseFloat(sum) + parseFloat(shippingPriceOne)
+<!--    var grandTotalOne = grandTotal.digits()-->
+    $('#grandTotal').text(grandTotal.toFixed(2));
+};
+
+    </script>
 </body>
 </html>

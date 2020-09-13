@@ -1,11 +1,24 @@
 package org.launchcode.shoppingclothing.controllers;
 
+import org.launchcode.shoppingclothing.models.Product;
+import org.launchcode.shoppingclothing.models.data.CartItemRepository;
+import org.launchcode.shoppingclothing.models.data.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Optional;
 
 @Controller
 public class ProductController {
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private CartItemRepository cartItemRepository;
 
     @RequestMapping("man")
     public String displaymen(Model model) {
@@ -37,12 +50,6 @@ public class ProductController {
         return "girl";
     }
 
-    @RequestMapping("shoppingcart")
-    public String displayshoppingcart(Model model) {
-        model.addAttribute("title", "All Shopping List");
-        return "shoppingcart";
-    }
-
     @RequestMapping("proceedtocheckout")
     public String displayshippingpayment(Model model) {
         model.addAttribute("title", "Shipping and Payment");
@@ -61,5 +68,28 @@ public class ProductController {
         return "index";
     }
 
+//    @GetMapping("shoppingcart")
+//    public String displaymansuit(Model model) {
+//        model.addAttribute("title", "Display shoppingcart");
+//        model.addAttribute(new Product());
+//        return "product";
+//    }
 
+
+    @RequestMapping("product/{id}")
+    public String displayProduct(Model model, @PathVariable int id) {
+        // get optProduct by id from database
+        Optional<Product> optProduct = productRepository.findById(id);
+
+        // return to different page if id doesn't exist in database
+        if( optProduct == null) {
+            //return to some other page. Select whatever you want.
+            return "redirect:man";
+        }
+
+        // get the product and pass it to the front-end
+        Product product = optProduct.get();
+        model.addAttribute("product", product);
+        return "product";
+    }
 }

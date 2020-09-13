@@ -6,8 +6,8 @@
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
     <link th:href="@{/css/techjobs.css}" rel="stylesheet" />
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="icon" href="images/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="icon" href="images/favicon.png"/>
 
     <title th:text="'Shoppingclothing' + ${title == null ? '' : ' :: ' + title}">Shopping Clothing</title>
 </head>
@@ -45,13 +45,30 @@
                 <a th:href="@{/shoppingcart}">
                     <i class="fa fa-shopping-cart" style="font-size:36px; margin:10px"></i>
                 </a>
+<!--                <a th:href="@{/logout}" title="Logout">-->
+<!--                    <i class="fa fa-user icon" style="font-size:36px; margin:10px"></i>-->
+<!--                </a>-->
                 <a th:href="@{/login}">
                     <i class="fa fa-user icon" style="font-size:36px; margin:10px"></i>
                 </a>
+                <a href="/logout" >Log Out</a>
             </div>
         </div>
-
     </div>
+<div th:fragment="yang">
+    <div class="product-item a">
+        <!--            th:each="product : ${products}">  /*th:each="product : ${products}"*/-->
+        <!--            <img src="/image/man/man111.jpg" style="width:500px;height:300px; margin-left:190px">-->
+        <img th:src="${'/image/' + product.product_line + '/' + product.image_file_name}" style="width:500px;height:300px; margin-left:190px">
+    </div>
+    <div class="product-item b">
+        <!--            th:each="product : ${products}">-->
+        <div th:text="${'Brand: ' + product.brand}"></div>
+        <div th:text="${'Category: ' + product.category}"></div>
+        <div th:text="${'Size: ' + product.size}"></div>
+        <div th:text="${'Price: $' + product.price}"></div>
+    </div>
+</div>
 </body>
 </html>
 

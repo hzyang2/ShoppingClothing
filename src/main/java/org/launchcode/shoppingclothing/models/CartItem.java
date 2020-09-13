@@ -1,0 +1,51 @@
+package org.launchcode.shoppingclothing.models;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
+@Entity
+public class CartItem extends AbstractEntity {
+
+    @ManyToOne //from a list of many users, match one to this CartItem
+    @NotNull
+    private User user;
+
+    @ManyToOne //from many Products, match one to this CartItem.
+    @NotNull
+    private Product product;
+
+    @NotNull
+    private int qty;
+
+    public CartItem() {}
+
+    public CartItem(User user, Product product) {
+        this.user = user;
+        this.product = product;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+}
