@@ -29,6 +29,21 @@
                 <td class="grid-item ad">
                     Qty
                     <p><input type="text" th:data-cartitemid="${cartItem.id}" id="qty" name="qty[]" th:value="${cartItem.qty}" class="qty-input"/></p>
+<!--                    <div>-->
+<!--                        <select th:data-cartitemid="${cartItem.id}" id="qty" name="qty[]" th:value="${cartItem.qty}" class="qty-select">-->
+<!--                            <option>- qty -</option>-->
+<!--                            <option value="1">1</option>-->
+<!--                            <option value="2">2</option>-->
+<!--                            <option value="3">3</option>-->
+<!--                            <option value="4">4</option>-->
+<!--                            <option value="5">5</option>-->
+<!--                            <option value="6">6</option>-->
+<!--                            <option value="7">7</option>-->
+<!--                            <option value="8">8</option>-->
+<!--                            <option value="9">9</option>-->
+<!--                            <option value="10">10</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
                 </td>
                 <td class="grid-item ae">
                     Extended Price
@@ -70,12 +85,6 @@
             </div>
         </div>
     <div class="result">
-        <div class="result-item a">
-            <a th:href="@{/shoppingcart}" class="updateshoppingcart">Update Shopping Cart</a>
-<!--            <form th:href="@{/shoppingcart}">-->
-<!--                <input type="submit" class="btn-primary-shoppingcart" value="Update Shopping Cart" />-->
-<!--            </form>-->
-        </div>
         <div class="result-item b">
             <a th:href="@{/proceedtocheckout}" class="proceedtocheckout">Proceed to Checkout</a>
 <!--            <form method="post" th:href="@{/proceedtocheckout}">-->
@@ -98,8 +107,15 @@ $("input[data-cartitemid]").change(function() {
     var price = $('span.price[data-cartitemid="' + cartItemId + '"]')[0].innerText
     var qty = this.value
     $('span.xprice[data-cartitemid="' + cartItemId + '"]')[0].innerText=(price * qty).toFixed(2)
+    var dataToSave = { cartItemId: cartItemId, qty: qty }
+    $.post("/saveCartItemQty", dataToSave, doneSavingChanges)
     calculateSum()
 });
+
+function doneSavingChanges(result) {
+    alert(result)
+    console.log (result)
+}
 
 function calculateSum() {
     var sum = 0;
@@ -114,10 +130,8 @@ function calculateSum() {
 
     var shippingPriceOne = $('#shippingPrice').text();
     var grandTotal = parseFloat(sum) + parseFloat(shippingPriceOne)
-<!--    var grandTotalOne = grandTotal.digits()-->
     $('#grandTotal').text(grandTotal.toFixed(2));
 };
-
     </script>
 </body>
 </html>

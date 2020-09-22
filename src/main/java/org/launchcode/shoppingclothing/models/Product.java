@@ -22,6 +22,11 @@ public class Product extends AbstractEntity {
     public Product() {
     }
 
+    @Override
+    public boolean isMatchingPassword(String password) {
+        return false;
+    }
+
     public String getProduct_line() {
         return product_line;
     }

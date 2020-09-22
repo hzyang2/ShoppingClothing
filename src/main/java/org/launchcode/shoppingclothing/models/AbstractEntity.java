@@ -35,6 +35,8 @@ public abstract class AbstractEntity {
 
     public AbstractEntity() {}
 
+    public abstract boolean isMatchingPassword(String password);
+
 //    public AbstractEntity(String name) { this.name = name; }
 //
 //    public String getName() {

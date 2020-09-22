@@ -2,6 +2,7 @@ package org.launchcode.shoppingclothing.controllers;
 
 import org.launchcode.shoppingclothing.models.CartItem;
 import org.launchcode.shoppingclothing.models.Product;
+import org.launchcode.shoppingclothing.models.ShippingAndPayment;
 import org.launchcode.shoppingclothing.models.User;
 import org.launchcode.shoppingclothing.models.data.CartItemRepository;
 import org.launchcode.shoppingclothing.models.data.ProductRepository;
@@ -9,11 +10,15 @@ import org.launchcode.shoppingclothing.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -65,18 +70,63 @@ public class ShoppingCartController {
     }
 
     @RequestMapping("deleteItem/{cartItemId}")
-    public String deleteItem (HttpServletRequest request, Model model,
-                              @PathVariable int cartItemId) throws Exception {
+    public String deleteItem(HttpServletRequest request, Model model,
+                             @PathVariable int cartItemId) throws Exception {
         cartItemRepository.deleteById(cartItemId);
         return viewCart(request, model);
     }
 
     @RequestMapping("shoppingcart")
-    public String viewCart (HttpServletRequest request, Model model) throws Exception {
+    public String viewCart(HttpServletRequest request, Model model) throws Exception {
         User user = getUserFromRequest(request);
         Iterable<CartItem> cartItems = cartItemRepository.findAllByUser(user);
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("title", "Shopping Cart");
         return "shoppingcart";
+    }
+
+    @PostMapping("saveCartItemQty")
+    public String saveCartItemQty(HttpServletRequest request, int cartItemId, int qty) throws Exception {
+        //TODO: pass in Principal principal instead of getUserFromRequest()?
+        User user = getUserFromRequest(request);
+        if (user == null) {
+            return "fail sauce"; //TODO: redirect to login
+        }
+        if (qty < 1) {
+            return "fail sauce";
+        }
+        //TODO: code for exceptions from db
+        CartItem cartItem = cartItemRepository.findByIdAndUser(cartItemId, user);
+        if (cartItem != null ) {
+            cartItem.setQty(qty);
+            cartItemRepository.save(cartItem);
+            return "success";
+        } else {
+            return "fail sauce";
+        }
+    }
+
+    @RequestMapping("proceedtocheckout")
+    public String displayshippingpayment(HttpServletRequest request, Model model) throws Exception {
+        User user = getUserFromRequest(request);
+        if (user == null) {
+            return "fail sauce"; //TODO: redirect to login
+        }
+        model.addAttribute("title", "ShippingAndPayment");
+        ShippingAndPayment shippingAndPayment = new ShippingAndPayment(user.getFirstname(), user.getLastname(),
+                user.getStreetaddress(), user.getCity(), user.getState(), user.getZipcode(), user.getPhonenumber(),
+                user.getCreditcardnumber(), user.getCardverificationnumber(), user.getExpirationmonth(), user.getExpirationyear());
+        model.addAttribute("shippingAndPayment", new ShippingAndPayment());
+        return "shipping&payment";
+    }
+
+    @PostMapping("proceedtocheckout")
+    public String checkout(@ModelAttribute @Valid ShippingAndPayment newShippingAndPayment,
+                           Errors errors, Model model) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "ShippingAndPayment");
+            return "shipping&payment";
+        }
+        return "thanks";
     }
 }

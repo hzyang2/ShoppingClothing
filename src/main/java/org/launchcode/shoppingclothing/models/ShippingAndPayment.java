@@ -1,23 +1,10 @@
-package org.launchcode.shoppingclothing.models.dto;
+package org.launchcode.shoppingclothing.models;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class RegisterFormDTO extends LoginFormDTO {
-    private String verifyPassword;
-
-    public String getVerifyPassword() {
-        return verifyPassword;
-    }
-
-    public void setVerifyPassword(String verifyPassword) {
-        this.verifyPassword = verifyPassword;
-    }
-
-//    public RegisterFormDTO (int prodId) {
-//        super(prodId);
-//    }
+public class ShippingAndPayment {
 
     @NotNull
     @NotBlank
@@ -26,33 +13,8 @@ public class RegisterFormDTO extends LoginFormDTO {
 
     @NotNull
     @NotBlank
-    @Size(min = 1, max = 20, message = "Invalid last name. Must be between 1 and 20 characters.")
+    @Size(min = 1, max= 20, message = "Invalid last name. Must be between 1 and 20 characters.")
     private String lastname;
-
-    @NotNull
-    @NotBlank
-    @Size(min = 3, max = 20, message = "Invalid email. Must be between 3 and 20 characters.")
-    private String email;
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getEmail() { return email; }
-
-    public void setEmail(String email) { this.email = email; }
 
     @NotNull
     @NotBlank
@@ -66,19 +28,19 @@ public class RegisterFormDTO extends LoginFormDTO {
 
     @NotNull
     @NotBlank
-    @Size(min = 1, max= 20, message = "Invalid zip code. Must be between 1 and 20 characters.")
+    @Size(min = 1, max= 20, message = "Invalid state. Must be between 1 and 20 characters.")
     private String state;
 
     @NotNull
     @NotBlank
-    @Size(min = 1, max= 5, message = "Invalid zip code. Must be between 1 and 5 numbers.")
-//    @Size(min = 5, max= 5, message = "Invalid zip code. Must be 5 numbers.")
+    @Size(min = 5, max= 5, message = "Invalid zip code. Must be 5 numbers.")
+//    @Size(min = 1, max= 5, message = "Invalid zip code. Must be between 1 and 5 numbers.")
     private String zipcode;
 
     @NotNull
     @NotBlank
-    @Size(min = 1, max= 10, message = "Invalid phone number. Must be between 1 and 10 numbers.")
-//    @Size(min = 10, max= 10, message = "Invalid phone number. Must be 10 numbers.")
+    @Size(min = 10, max= 10, message = "Invalid phone number. Must be 10 numbers.")
+//    @Size(min = 1, max= 10, message = "Invalid phone number. Must be between 1 and 10 numbers.")
     private String phonenumber;
 
     @NotNull
@@ -100,6 +62,41 @@ public class RegisterFormDTO extends LoginFormDTO {
     @NotBlank
     @Size(min = 4, max= 4, message = "Invalid expiration year. Must be 4 numbers.")
     private String expirationyear;
+
+    public ShippingAndPayment(String firstname, String lastname, String streetaddress, String city, String state, String zipcode, String phonenumber,
+                              String creditcardnumber , String cardverificationnumber , String expirationmonth , String expirationyear) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.streetaddress = streetaddress;
+        this.city = city;
+        this.zipcode = zipcode;
+        this.phonenumber = phonenumber;
+        this.state = state;
+        this.creditcardnumber = creditcardnumber;
+        this.cardverificationnumber = cardverificationnumber;
+        this.expirationmonth = expirationmonth;
+        this.expirationyear = expirationyear;
+    }
+
+//    public ShippingAndPayment(String firstname, String lastname, String streetaddress, String city, String state, String zipcode, String phonenumber) {}
+
+    public ShippingAndPayment() {}
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
     public String getStreetaddress() {
         return streetaddress;

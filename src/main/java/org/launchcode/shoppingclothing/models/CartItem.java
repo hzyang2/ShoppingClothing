@@ -20,6 +20,11 @@ public class CartItem extends AbstractEntity {
 
     public CartItem() {}
 
+    @Override
+    public boolean isMatchingPassword(String password) {
+        return false;
+    }
+
     public CartItem(User user, Product product) {
         this.user = user;
         this.product = product;

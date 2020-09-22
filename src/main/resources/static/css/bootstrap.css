@@ -7,6 +7,19 @@
   height:30px;
 }
 
+.btn-primary-placeorder {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  width: 200px;
+  height:50px;
+  font-size: 20px;
+}
+
+.submit-placeorder {
+    margin-left: 1000px;
+}
+
 .btn-primary-shoppingcart {
   color: #fff;
   background-color: #337ab7;
@@ -17,6 +30,7 @@
   margin-left:700px;
   font-size: 15px;
 }
+
 
 .btn-primary-checkout {
   color: #fff;
@@ -137,7 +151,18 @@ fieldset[disabled] .btn-primary.focus {
 .error {
     color: red;
     font-size: 14px;
+    margin-left: 150px;
+}
+
+.error.creditcard {
+    color: red;
+    font-size: 14px;
+    margin-left: 200px;
+}
+
+.error.creditcard-year {
     margin-left: 8px;
+    margin-top: 10px;
 }
 
 .error-password-login {
@@ -201,6 +226,10 @@ fieldset[disabled] .btn-primary.focus {
 .searchicon{
     width: 30px;
     height: 30px;
+}
+
+.expiration {
+    display: inline-block;
 }
 
 .grid {
@@ -284,7 +313,7 @@ fieldset[disabled] .btn-primary.focus {
 .proceedtocheckout {
     margin-top: 40px;
     margin-bottom: 20px;
-    margin-left:270px;
+    margin-left:0px;
     font-size: 25px;
     color: white;
     background-color: #2daee4;
@@ -388,6 +417,7 @@ fieldset[disabled] .btn-primary.focus {
 
 .result-item.b {
     margin-bottom: 40px;
+    margin-left:1000px;
 }
 
 .shippingaddress {
@@ -412,21 +442,29 @@ fieldset[disabled] .btn-primary.focus {
 }
 
 .creditcardaddress {
+    display: inline-block;
+}
+
+.creditcardaddress.a {
+    margin-left: 200px;
+}
+
+.creditcardaddress.b {
     font-size: 18px;
     color: black;
-    margin-left: 250px;
+    margin-left: 0px;
     margin-top: 10px;
 }
 
 .creditcardaddressbox {
     width: 400px;
     height: 200px;
-    margin-left: 280px;
+    margin-left: 240px;
     margin-top: 10px;
 }
 
 .creditcardtype {
-    font-size: 25px;
+    font-size: 20px;
     color: black;
     margin-left: 200px;
     margin-top: 10px;
@@ -434,6 +472,12 @@ fieldset[disabled] .btn-primary.focus {
 
 .firstnamebox {
     width: 400px;
+    height: 30px;
+    margin-left: 150px;
+}
+
+.country {
+    width: 200px;
     height: 30px;
     margin-left: 150px;
 }
@@ -454,6 +498,32 @@ fieldset[disabled] .btn-primary.focus {
     font-style: bold;
     text-color: black;
     margin-left: 150px;
+}
+
+.creditcardtypeinput {
+    margin-left: 200px;
+    width: 200px;
+    height: 30px;
+}
+
+.month {
+    margin-left: 200px;
+    width: 150px;
+    height: 30px;
+}
+
+.qty-select {
+    width: 70px;
+    height: 30px;
+    margin-top: 20px;
+    font-size: 17px;
+    text-align: center;
+}
+
+.year {
+    margin-left: 3px;
+    width: 150px;
+    height: 30px;
 }
 
 .creditcardtype-item {
@@ -493,6 +563,30 @@ fieldset[disabled] .btn-primary.focus {
     vertical-align: top;
 }
 
+.expirationdate-item.a {
+    width: 200px;
+    height: 30px;
+    margin-left: 200px;
+ }
+
+ .expirationdate-item.b {
+    width: 200px;
+    height: 30px;
+    margin-left: 200px;
+  }
+
+.select month {
+    width: 235px;
+    height: 30px;
+    margin-left: 200px;
+}
+
+.select year {
+    width: 235px;
+    height: 30px;
+    margin-left: 200px;
+}
+
 .expirationdatemonthbox {
     width: 235px;
     height: 30px;
@@ -506,10 +600,9 @@ fieldset[disabled] .btn-primary.focus {
 }
 
 .cardverificationnumberbox {
-    width: 235px;
+    width: 150px;
     height: 30px;
     margin-left: 200px;
-    margin-bottom: 20px;
 }
 
 .placeholder {
