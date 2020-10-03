@@ -7,7 +7,8 @@
     <link th:href="@{/css/techjobs.css}" rel="stylesheet" />
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="icon" href="images/favicon.png"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--    <link rel="icon" href="images/favicon.png"/>-->
 
     <title th:text="'Shoppingclothing' + ${title == null ? '' : ' :: ' + title}">Shopping Clothing</title>
 </head>
@@ -21,12 +22,12 @@
         </div>
         <div>
             <div style="margin-left:600px">
-                <ul>
-                    <a th:href="@{/man}" class="navbar">Man</a>
-                    <a th:href="@{/woman}" class="navbar">Woman</a>
-                    <a th:href="@{/baby}" class="navbar">Baby</a>
-                    <a th:href="@{/boy}" class="navbar">Boy</a>
-                    <a th:href="@{/girl}" class="navbar">Girl</a>
+                <ul class="navbar-nav">
+                    <a th:href="@{/man}" class="nav-item">Man</a>
+                    <a th:href="@{/woman}" class="nav-item">Woman</a>
+                    <a th:href="@{/baby}" class="nav-item">Baby</a>
+                    <a th:href="@{/boy}" class="nav-item">Boy</a>
+                    <a th:href="@{/girl}" class="nav-item">Girl</a>
                 </ul>
             </div>
         </div>
@@ -36,11 +37,21 @@
 <!--                <i class="fa fa-search"></i>-->
 <!--            </a>-->
             <div class="search-item a">
-                <form class="example" action="action_page.php">
-                    <input class="example-one" type="text" placeholder="Type to search" name="search">
+                <form class="example" method="post" th:href="@{/searchresult}" action="/fragments">
+                    <input class="example-one" type="text" placeholder="Type to search" name="search" id="search">
                     <button class="example-two" type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </div>
+<!--            <script>-->
+<!--$("button[type='submit']").click(function() {-->
+<!--    //var searchText = $("#search")[0].value-->
+<!--    $.post("/product/search", { searchText: $("#search")[0].value }, doneSearching)-->
+<!--});-->
+
+<!--function doneSearching(data) {-->
+<!--    console.log(data);-->
+<!--}-->
+<!--            </script>-->
             <div class="search-item b">
                 <a th:href="@{/shoppingcart}">
                     <i class="fa fa-shopping-cart" style="font-size:36px; margin:10px"></i>

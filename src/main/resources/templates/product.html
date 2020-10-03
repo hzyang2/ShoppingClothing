@@ -19,8 +19,8 @@
             <div th:text="${'Size: ' + product.size}"></div>
             <div th:text="${'Price: $' + product.price}"></div>
         </div>
-        <div>
-           <a th:href="${'/addtocart/' + product.id}" class="addtocart">Add to Cart</a>
+        <div style="margin-left:1200px;">
+           <a class="btn btn-primary" th:href="${'/addtocart/' + product.id}">Add to Cart</a>
 <!--            <form method="post">-->
 <!--                <input type="submit" class="btn-primary-checkout" value="Add to Cart" />-->
 <!--            </form>-->

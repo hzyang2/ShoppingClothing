@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -76,14 +73,51 @@ public class ShoppingCartController {
         return viewCart(request, model);
     }
 
+//    @RequestMapping("shoppingcart")
+//    public String viewCart(HttpServletRequest request, Model model) throws Exception {
+//        User user = getUserFromRequest(request);
+//        Iterable<CartItem> cartItems = cartItemRepository.findAllByUser(user);
+//        model.addAttribute("cartItems", cartItems);
+//        model.addAttribute("title", "Shopping Cart");
+//        return "shoppingcart";
+//    }
+
     @RequestMapping("shoppingcart")
     public String viewCart(HttpServletRequest request, Model model) throws Exception {
+        User user = getUserFromRequest(request);
+        if(user == null) {
+            model.addAttribute("title", "Index");
+            return "index";
+        } else {
+            Iterable<CartItem> cartItems = cartItemRepository.findAllByUser(user);
+            model.addAttribute("cartItems", cartItems);
+            model.addAttribute("title", "Shopping Cart");
+            return "shoppingcart";
+        }
+    }
+
+    @PostMapping("shoppingcart")
+    public String displayshipping(HttpServletRequest request, Model model) throws Exception {
         User user = getUserFromRequest(request);
         Iterable<CartItem> cartItems = cartItemRepository.findAllByUser(user);
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("title", "Shopping Cart");
-        return "shoppingcart";
+        return "redirect:proceedtocheckout";
     }
+
+//    @PostMapping("shoppingcart")
+//    public String displayshipping(HttpServletRequest request, Model model, int cartItemId) throws Exception {
+//        User user = getUserFromRequest(request);
+//        CartItem cartItem = cartItemRepository.findByIdAndUser(cartItemId, user);
+//        if(cartItem == null) {
+//            return "index";
+//        } else {
+//            Iterable<CartItem> cartItems = cartItemRepository.findAllByUser(user);
+//            model.addAttribute("cartItems", cartItems);
+//            model.addAttribute("title", "Shopping Cart");
+//            return "redirect:proceedtocheckout";
+//        }
+//    }
 
     @PostMapping("saveCartItemQty")
     public String saveCartItemQty(HttpServletRequest request, int cartItemId, int qty) throws Exception {

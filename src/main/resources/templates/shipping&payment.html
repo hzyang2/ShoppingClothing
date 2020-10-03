@@ -8,168 +8,6 @@
 
     <div th:replace="fragments :: page-header"></div>
 
-
-<!--    <form method="post" th:href="@{/checkout}">-->
-<!--        <div>-->
-<!--            <div class="shopping-item a">-->
-<!--                <h2 class="shippingaddress">Shipping Address</h2>-->
-<!--                <div>-->
-<!--                    <div class="first">First Name</div>-->
-<!--                    <input type="text" th:field="${shippingAndPayment.firstname}" class="firstnamebox"/>-->
-<!--                    <p class="error" th:errors="${shippingAndPayment.firstname}"></p>-->
-<!--                    <div class="first">Last Name</div>-->
-<!--                    <input type="text" th:field="${shippingAndPayment.lastname}" class="firstnamebox"/>-->
-<!--                    <p class="error" th:errors="${shippingAndPayment.lastname}"></p>-->
-<!--                    <div class="first">Street Address</div>-->
-<!--                    <input type="text" th:field="${shippingAndPayment.streetaddress}" class="firstnamebox"/>-->
-<!--                    <p class="error" th:errors="${shippingAndPayment.streetaddress}"></p>-->
-<!--                    <div class="first">City</div>-->
-<!--                    <input type="text" th:field="${shippingAndPayment.city}" class="firstnamebox"/>-->
-<!--                    <p class="error" th:errors="${shippingAndPayment.city}"></p>-->
-<!--                    <div class="first">State</div>-->
-<!--                    <form>-->
-<!--                        <table>-->
-<!--                            <tr>-->
-<!--                                <td> <input type="text" th:field="${shippingAndPayment.stat}" class="firstnamebox"/>-->
-<!--&lt;!&ndash;                                <td type="text" th:field="${shippingAndPayment.state}" class="firstnamebox"/>&ndash;&gt;-->
-<!--                                    <select class="country">-->
-<!--                                        <option>Select</option>-->
-<!--                                        <option value="AL">Alabama</option>-->
-<!--                                        <option value="AK">Alaska</option>-->
-<!--                                        <option value="AZ">Arizona</option>-->
-<!--                                        <option value="AR">Arkansas</option>-->
-<!--                                        <option value="CA">California</option>-->
-<!--                                        <option value="CO">Colorado</option>-->
-<!--                                        <option value="CT">Connecticut</option>-->
-<!--                                        <option value="DE">Delaware</option>-->
-<!--                                        <option value="DC">District Of Columbia</option>-->
-<!--                                        <option value="FL">Florida</option>-->
-<!--                                        <option value="GA">Georgia</option>-->
-<!--                                        <option value="HI">Hawaii</option>-->
-<!--                                        <option value="ID">Idaho</option>-->
-<!--                                        <option value="IL">Illinois</option>-->
-<!--                                        <option value="IN">Indiana</option>-->
-<!--                                        <option value="IA">Iowa</option>-->
-<!--                                        <option value="KS">Kansas</option>-->
-<!--                                        <option value="KY">Kentucky</option>-->
-<!--                                        <option value="LA">Louisiana</option>-->
-<!--                                        <option value="ME">Maine</option>-->
-<!--                                        <option value="MD">Maryland</option>-->
-<!--                                        <option value="MA">Massachusetts</option>-->
-<!--                                        <option value="MI">Michigan</option>-->
-<!--                                        <option value="MN">Minnesota</option>-->
-<!--                                        <option value="MS">Mississippi</option>-->
-<!--                                        <option value="MO">Missouri</option>-->
-<!--                                        <option value="MT">Montana</option>-->
-<!--                                        <option value="NE">Nebraska</option>-->
-<!--                                        <option value="NV">Nevada</option>-->
-<!--                                        <option value="NH">New Hampshire</option>-->
-<!--                                        <option value="NJ">New Jersey</option>-->
-<!--                                        <option value="NM">New Mexico</option>-->
-<!--                                        <option value="NY">New York</option>-->
-<!--                                        <option value="NC">North Carolina</option>-->
-<!--                                        <option value="ND">North Dakota</option>-->
-<!--                                        <option value="OH">Ohio</option>-->
-<!--                                        <option value="OK">Oklahoma</option>-->
-<!--                                        <option value="OR">Oregon</option>-->
-<!--                                        <option value="PA">Pennsylvania</option>-->
-<!--                                        <option value="RI">Rhode Island</option>-->
-<!--                                        <option value="SC">South Carolina</option>-->
-<!--                                        <option value="SD">South Dakota</option>-->
-<!--                                        <option value="TN">Tennessee</option>-->
-<!--                                        <option value="TX">Texas</option>-->
-<!--                                        <option value="UT">Utah</option>-->
-<!--                                        <option value="VT">Vermont</option>-->
-<!--                                        <option value="VA">Virginia</option>-->
-<!--                                        <option value="WA">Washington</option>-->
-<!--                                        <option value="WV">West Virginia</option>-->
-<!--                                        <option value="WI">Wisconsin</option>-->
-<!--                                        <option value="WY">Wyoming</option>-->
-<!--                                    </select>-->
-<!--                                </td>-->
-<!--                                <td id="response">-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                        </table>-->
-<!--                    </form>-->
-<!--                    <p class="error" th:errors="${shippingAndPayment.state}"></p>-->
-<!--                    <div class="first">Zip/Postal Code</div>-->
-<!--                    <input type="text" th:field="${shippingAndPayment.zipcode}" class="firstnamebox"/>-->
-<!--                    <p class="error" th:errors="${shippingAndPayment.zipcode}"></p>-->
-<!--                    <div class="first">Phone Number</div>-->
-<!--                    <input type="text" th:field="${shippingAndPayment.phonenumber}" class="firstnamebox"/>-->
-<!--                    <p class="error" th:errors="${shippingAndPayment.phonenumber}"></p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="shopping-item b">-->
-<!--                <h2 class="paymentmethod">Payment Method</h2>-->
-<!--                <div>-->
-<!--                    <div class="creditcardaddress">-->
-<!--                        <div class="creditcardaddress a" >-->
-<!--                            <input type="checkbox">-->
-<!--                        </div>-->
-<!--                        <div class="creditcardaddress b">My billing and shipping address are the same</div>-->
-<!--                    </div>-->
-<!--                    <div>-->
-<!--                        <input type="text" name="creditcardaddress" class="creditcardaddressbox"/>-->
-<!--                    </div>-->
-<!--                    <div class="creditcardtype">Credit Card Number</div>-->
-<!--                    <input type="text" name="creditcardnumber" class="creditcardnumberbox"/>-->
-<!--                    <div class="creditcardtype">Expiration Date</div>-->
-<!--                    <select name="DOBDay" class="month">-->
-<!--                        <option>- Month -</option>-->
-<!--                        <option value="January">January</option>-->
-<!--                        <option value="Febuary">Febuary</option>-->
-<!--                        <option value="March">March</option>-->
-<!--                        <option value="April">April</option>-->
-<!--                        <option value="May">May</option>-->
-<!--                        <option value="June">June</option>-->
-<!--                        <option value="July">July</option>-->
-<!--                        <option value="August">August</option>-->
-<!--                        <option value="September">September</option>-->
-<!--                        <option value="October">October</option>-->
-<!--                        <option value="November">November</option>-->
-<!--                        <option value="December">December</option>-->
-<!--                    </select>-->
-<!--                    <select name="DOBYear" class="year">-->
-<!--                        <option>- Year -</option>-->
-<!--                        <option value="2020">2020</option>-->
-<!--                        <option value="2021">2021</option>-->
-<!--                        <option value="2022">2022</option>-->
-<!--                        <option value="2023">2023</option>-->
-<!--                        <option value="2024">2024</option>-->
-<!--                        <option value="2025">2025</option>-->
-<!--                        <option value="2026">2026</option>-->
-<!--                        <option value="2027">2027</option>-->
-<!--                        <option value="2028">2028</option>-->
-<!--                        <option value="2029">2029</option>-->
-<!--                        <option value="2030">2030</option>-->
-<!--                    </select>-->
-<!--                    <div class="creditcardtype">Card Verification Number</div>-->
-<!--                        <input type="text" name="cardverificationnumber" class="cardverificationnumberbox">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="submit-placeorder">-->
-<!--                <input type="submit" class="btn-primary-placeorder" value="Place Order" />-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </form>-->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script>
-$(document).ready(function(){
-    $("select.country").change(function(){
-        var selectedCountry = $(".country option:selected").val();
-        $.ajax({
-            type: "POST",
-            url: "process-request.php",
-            data: { country : selectedCountry }
-        }).done(function(data){
-            $("#response").html(data);
-        });
-    });
-});
-</script>
-
     <form method="post" th:href="@{/checkout}">
         <div>
             <div class="shopping-item a">
@@ -177,16 +15,16 @@ $(document).ready(function(){
                 <div>
                     <div class="first">First Name</div>
                     <input type="text" th:field="${shippingAndPayment.firstname}" class="firstnamebox"/>
-                    <p class="error" th:errors="${shippingAndPayment.firstname}"></p>
+                    <p class="error-shipping" th:errors="${shippingAndPayment.firstname}"></p>
                     <div class="first">Last Name</div>
                     <input type="text" th:field="${shippingAndPayment.lastname}" class="firstnamebox"/>
-                    <p class="error" th:errors="${shippingAndPayment.lastname}"></p>
+                    <p class="error-shipping" th:errors="${shippingAndPayment.lastname}"></p>
                     <div class="first">Street Address</div>
                     <input type="text" th:field="${shippingAndPayment.streetaddress}" class="firstnamebox"/>
-                    <p class="error" th:errors="${shippingAndPayment.streetaddress}"></p>
+                    <p class="error-shipping" th:errors="${shippingAndPayment.streetaddress}"></p>
                     <div class="first">City</div>
                     <input type="text" th:field="${shippingAndPayment.city}" class="firstnamebox"/>
-                    <p class="error" th:errors="${shippingAndPayment.city}"></p>
+                    <p class="error-shipping" th:errors="${shippingAndPayment.city}"></p>
                     <div class="first">State</div>
                         <table>
                             <tr>
@@ -250,26 +88,21 @@ $(document).ready(function(){
                                 </td>
                             </tr>
                         </table>
-                    <p class="error" th:errors="${shippingAndPayment.state}"></p>
+                    <p class="error-shipping" th:errors="${shippingAndPayment.state}"></p>
                     <div class="first">Zip/Postal Code</div>
                     <input type="text" th:field="${shippingAndPayment.zipcode}" class="firstnamebox"/>
-                    <p class="error" th:errors="${shippingAndPayment.zipcode}"></p>
+                    <p class="error-shipping" th:errors="${shippingAndPayment.zipcode}"></p>
                     <div class="first">Phone Number</div>
                     <input type="text" th:field="${shippingAndPayment.phonenumber}" class="firstnamebox"/>
-                    <p class="error" th:errors="${shippingAndPayment.phonenumber}"></p>
+                    <p class="error-shipping" th:errors="${shippingAndPayment.phonenumber}"></p>
                 </div>
             </div>
             <div class="shopping-item b">
                 <h2 class="paymentmethod">Payment Method</h2>
                 <div>
-                    <div class="creditcardaddress">
-                        <div class="creditcardaddress a" >
-                            <input type="checkbox">
-                        </div>
-                        <div class="creditcardaddress b">My billing and shipping address are the same</div>
-                    </div>
-                    <div>
-                        <input type="text" name="creditcardaddress" class="creditcardaddressbox"/>
+                    <p><input type="checkbox" class="creditcardaddress a"> My billing and shipping address are the same</p>
+                    <div id="result">
+                        <textarea type="text" name="creditcardaddress" class="creditcardaddressbox" id="creditcardaddressinput" rows="6" cols="10"></textarea>
                     </div>
                     <div class="creditcardtype">Credit Card Number</div>
                     <input type="text" th:field="${shippingAndPayment.creditcardnumber}" class="creditcardnumberbox"/>
@@ -280,7 +113,7 @@ $(document).ready(function(){
                         <table>
                             <tr>
                                 <td>
-                                    <select name="DOBDay" class="month">
+                                    <select name="expirationmonth" class="month">
                                         <option value="">Month</option>
                                         <option value="January">January</option>
                                         <option value="Febuary">Febuary</option>
@@ -304,7 +137,7 @@ $(document).ready(function(){
                         <table>
                             <tr>
                                 <td>
-                                    <select name="DOBYear" class="year">
+                                    <select name="expirationyear" class="year">
                                         <option value="">Year</option>
                                         <option value="2020">2020</option>
                                         <option value="2021">2021</option>
@@ -333,8 +166,46 @@ $(document).ready(function(){
             </div>
         </div>
     </form>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+$(document).ready(function(){
+    $("select.country").change(function(){
+        var selectedCountry = $(".country option:selected").val();
+        $.ajax({
+            type: "POST",
+            url: "process-request.php",
+            data: { country : selectedCountry }
+        }).done(function(data){
+            $("#response").html(data);
+        });
+    });
+});
 
+<!--$("#chkAdr").change(function(){-->
+<!--$(".creditcardaddressbox")[0].value = $("#firstname")[0].value + " " + $("#lastname")[0].value + " " + "\n" +-->
+<!--                                      $("#streetaddress")[0].value + " " + "\n" +-->
+<!--                                      $("#city")[0].value + "," + " " +-->
+<!--                                      $("select[name=state]").val() + "\n" +-->
+<!--                                      $("#zipcode")[0].value-->
+<!--});-->
 
+$('input[type="checkbox"]').click(function(){
+    if($(this).is(":checked")){
+        $(".creditcardaddressbox")[0].value = $("#firstname")[0].value + " " + $("#lastname")[0].value + " " + "\n" +
+                                              $("#streetaddress")[0].value + " " + "\n" +
+                                              $("#city")[0].value + "," + " " +
+                                              $("select[name=state]").val() + "\n" +
+                                              $("#zipcode")[0].value
+    }
+    else if($(this).is(":not(:checked)")){
+        $(".creditcardaddressbox")[0].value = "First Name:" + "\n" + "Last Name:" + "\n" +
+                                              "Street Address:" + "\n" + "City:" + "\n" +
+                                              "State:" + "\n" + "Zip/Postal Code:" + "\n"
+
+    }
+});
+
+</script>
 
 </body>
 </html>

@@ -9,104 +9,83 @@
     <div th:replace="fragments :: page-header"></div>
 
     <h2 style="margin:50px">Item</h2>
-    <div class="grid a">
-        <table>
-            <tr th:each="cartItem : ${cartItems}">
-                <td>
-                    <img th:src="${'/image/' + cartItem.product.product_line + '/' + cartItem.product.image_file_name}" class="grid-item aa">
-                </td>
-                <td class="grid-item ab">
-                    <p th:text="${'Brand: ' + cartItem.product.brand}"></p>
-                    <p th:text="${'Category: ' + cartItem.product.category}"></p>
-                    <p th:text="${'Size: ' + cartItem.product.size}"></p>
-                </td>
-                <td class="grid-item ac">
-                    Price
-                    <p class="price-p">
-                        $<span class="price" th:data-cartitemid="${cartItem.id}" th:text="${cartItem.product.price}"></span>
-                    </p>
-                </td>
-                <td class="grid-item ad">
-                    Qty
-                    <p><input type="text" th:data-cartitemid="${cartItem.id}" id="qty" name="qty[]" th:value="${cartItem.qty}" class="qty-input"/></p>
-<!--                    <div>-->
-<!--                        <select th:data-cartitemid="${cartItem.id}" id="qty" name="qty[]" th:value="${cartItem.qty}" class="qty-select">-->
-<!--                            <option>- qty -</option>-->
-<!--                            <option value="1">1</option>-->
-<!--                            <option value="2">2</option>-->
-<!--                            <option value="3">3</option>-->
-<!--                            <option value="4">4</option>-->
-<!--                            <option value="5">5</option>-->
-<!--                            <option value="6">6</option>-->
-<!--                            <option value="7">7</option>-->
-<!--                            <option value="8">8</option>-->
-<!--                            <option value="9">9</option>-->
-<!--                            <option value="10">10</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-                </td>
-                <td class="grid-item ae">
-                    Extended Price
-                    <p>
-                        $<span class="xprice" th:data-cartitemid="${cartItem.id}" th:text="${cartItem.product.price*cartItem.qty}"></span>
-                    </p>
-<!--                    <p class="subtotal" th:data-cartitemid="${cartItem.Id}" th:text="${cartItem.product.price*cartItem.qty}"></p>-->
-                    <form class="btn-primary-delete">
-                        <a th:href="${'/deleteItem/' + cartItem.id}">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </form>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="grid b">
-        <div class="summary">Summary</div>
-            <div class="grid-item-summary">
-                <div class="grid-item-summary a">
-                    <div class="grid-item-summary-detail">Subtotal</div>
-                    <div class="grid-item-summary-detail">Shipping</div>
-                    <div class="grid-item-summary-detail">Order Total</div>
-                </div>
-                <div class="grid-item-summary b">
-                    <div class="summarysubtotalbox-one">
-                        $<span type="number" class="summarysubtotalbox" id="result" ></span>
-<!--                        <input type="text" name="summarysubtotal" class="summarysubtotalbox"/>-->
+
+    <form method="post" th:href="@{/proceedtocheckout}">
+<!--        <form method="post" action="shoppingcart">-->
+
+        <div class="grid a">
+            <table>
+                <tr th:each="cartItem : ${cartItems}">
+                    <td>
+                        <img th:src="${'/image/' + cartItem.product.product_line + '/' + cartItem.product.image_file_name}" class="grid-item aa">
+                    </td>
+                    <td class="grid-item ab">
+                        <p th:text="${'Brand: ' + cartItem.product.brand}"></p>
+                        <p th:text="${'Category: ' + cartItem.product.category}"></p>
+                        <p th:text="${'Size: ' + cartItem.product.size}"></p>
+                    </td>
+                    <td class="grid-item ac">
+                        Price
+                        <p class="price-p">
+                            $<span class="price" th:data-cartitemid="${cartItem.id}" th:text="${cartItem.product.price}"></span>
+                        </p>
+                    </td>
+                    <td class="grid-item ad">
+                        Qty
+                        <p><input type="text" th:data-cartitemid="${cartItem.id}" id="qty" name="qty[]" th:value="${cartItem.qty}" class="qty-input"/></p>
+                    </td>
+                    <td class="grid-item ae">
+                        Extended Price
+                        <p style="margin-top:20px">
+                            $<span class="xprice" th:data-cartitemid="${cartItem.id}" th:text="${cartItem.product.price*cartItem.qty}"></span>
+                        </p>
+                        <form class="btn-primary-delete">
+                            <a th:href="${'/deleteItem/' + cartItem.id}">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="grid b">
+            <div class="summary">Summary</div>
+                <div class="grid-item-summary">
+                    <div class="grid-item-summary a">
+                        <div class="grid-item-summary-detail">Subtotal</div>
+                        <div class="grid-item-summary-detail">Shipping</div>
+                        <div class="grid-item-summary-detail">Order Total</div>
                     </div>
-                    <div class="shipping-price">
-                        $<span type="number" class="shipping-price-number" id="shippingPrice">3.25</span>
-<!--                        <input type="text" name="summaryshippingtotal" class="summaryshippingtotalbox"/>-->
-                    </div>
-                    <div class="summaryordertotalbox-one">
-                        $<span type="number" class="summaryordertotalbox" id="grandTotal"></span>
-<!--                        <input type="text" name="summaryordertotal" class="summaryordertotalbox"/>-->
+                    <div class="grid-item-summary b">
+                        <div class="summarysubtotalbox-one">
+                            $<span type="number" class="summarysubtotalbox" id="result" ></span>
+                        </div>
+                        <div class="shipping-price">
+                            $<span type="number" class="shipping-price-number" id="shippingPrice">3.25</span>
+                        </div>
+                        <div class="summaryordertotalbox-one">
+                            $<span type="number" class="summaryordertotalbox" id="grandTotal"></span>
+                        </div>
                     </div>
                 </div>
             </div>
+        <div class="result">
+            <div class="result-item b">
+                <a th:href="@{/proceedtocheckout}" class="btn btn-primary" style="width:250px;">Proceed to Checkout</a>
+            </div>
         </div>
-    <div class="result">
-        <div class="result-item b">
-            <a th:href="@{/proceedtocheckout}" class="proceedtocheckout">Proceed to Checkout</a>
-<!--            <form method="post" th:href="@{/proceedtocheckout}">-->
-<!--                <input type="submit" class="btn-primary-checkout" value="Proceed to Checkout" />-->
-<!--            </form>-->
-        </div>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </form>
     <script>
 $(document).ready(calculateSum);
 
-<!--$.fn.digits = function(){-->
-<!--    return this.each(function(){-->
-<!--        $(this).text( $(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") );-->
-<!--    })-->
-<!--}-->
-
 $("input[data-cartitemid]").change(function() {
     var cartItemId = $(this).data("cartitemid")
-    var price = $('span.price[data-cartitemid="' + cartItemId + '"]')[0].innerText
+    var price = parseFloat($('span.price[data-cartitemid="' + cartItemId + '"]')[0].innerText)
     var qty = this.value
-    $('span.xprice[data-cartitemid="' + cartItemId + '"]')[0].innerText=(price * qty).toFixed(2)
+    qty = Math.abs(Number.parseInt(qty))
+    // var xprice = numberWithCommas(price * qty)
+    var xprice = price * qty
+    $('span.xprice[data-cartitemid="' + cartItemId + '"]')[0].innerText = xprice
     var dataToSave = { cartItemId: cartItemId, qty: qty }
     $.post("/saveCartItemQty", dataToSave, doneSavingChanges)
     calculateSum()
@@ -118,20 +97,26 @@ function doneSavingChanges(result) {
 }
 
 function calculateSum() {
-    var sum = 0;
+    var subtotal = 0;
     //iterate through each td based on class and add the values
     $(".xprice").each(function() {
         //add only if the value is number
-        if(!isNaN(this.innerText) && this.innerText.length!=0) {
-            sum += parseFloat(this.innerText);
+        if (!isNaN(this.innerText) && this.innerText.length != 0) {
+            subtotal += parseFloat(this.innerText);
         }
     });
-    $('#result').text(sum.toFixed(2));
+    $('#result').text(numberWithCommas(subtotal));
+    var shippingPriceOne = parseFloat($('#shippingPrice').text());
+    var grandTotal = subtotal + shippingPriceOne
+    $('#grandTotal').text(numberWithCommas(grandTotal));
+}
 
-    var shippingPriceOne = $('#shippingPrice').text();
-    var grandTotal = parseFloat(sum) + parseFloat(shippingPriceOne)
-    $('#grandTotal').text(grandTotal.toFixed(2));
-};
+function numberWithCommas(number) {
+    var parts = parseFloat(number).toFixed(2).toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}
     </script>
 </body>
 </html>
+
