@@ -13,9 +13,3 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
     @Query(value = "SELECT * FROM shoppingclothing.product where category = ?1 or brand = ?1 or product_line = ?1 or size = ?1" , nativeQuery = true)
     Iterable<Product> findBySearchText(String search);
 }
-
-
-//    @Query("SELECT * FROM shoppingclothing.product\n" +
-//            "WHERE category like '%' + ?1 + '%'\n" +
-//            "   OR brand like '%' + ?1 + '%'\n" +
-//            "   OR product_line like '%' + ?1 + '%' ")

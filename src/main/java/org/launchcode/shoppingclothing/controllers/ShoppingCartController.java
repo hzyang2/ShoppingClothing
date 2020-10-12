@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Optional;
 
+@Transactional
 @Controller
 public class ShoppingCartController {
 
@@ -66,21 +68,24 @@ public class ShoppingCartController {
         }
     }
 
-    @RequestMapping("deleteItem/{cartItemId}")
+    @ResponseBody
+    @PostMapping("deleteItem")
     public String deleteItem(HttpServletRequest request, Model model,
-                             @PathVariable int cartItemId) throws Exception {
-        cartItemRepository.deleteById(cartItemId);
-        return viewCart(request, model);
+                             @RequestParam int cartItemId) throws Exception {
+        System.out.println("deleteItem called with cartItemId=" + cartItemId);
+        User user = getUserFromRequest(request);
+        if (user == null) {
+            return "login required";
+        }
+        CartItem cartItem = cartItemRepository.findByIdAndUser(cartItemId, user);
+        if (cartItem != null) {
+            cartItemRepository.deleteById(cartItemId);
+            return "success";
+        } else {
+            System.out.println("Error: Item to delete was not found.");
+            return "Sorry!";
+        }
     }
-
-//    @RequestMapping("shoppingcart")
-//    public String viewCart(HttpServletRequest request, Model model) throws Exception {
-//        User user = getUserFromRequest(request);
-//        Iterable<CartItem> cartItems = cartItemRepository.findAllByUser(user);
-//        model.addAttribute("cartItems", cartItems);
-//        model.addAttribute("title", "Shopping Cart");
-//        return "shoppingcart";
-//    }
 
     @RequestMapping("shoppingcart")
     public String viewCart(HttpServletRequest request, Model model) throws Exception {
@@ -105,29 +110,16 @@ public class ShoppingCartController {
         return "redirect:proceedtocheckout";
     }
 
-//    @PostMapping("shoppingcart")
-//    public String displayshipping(HttpServletRequest request, Model model, int cartItemId) throws Exception {
-//        User user = getUserFromRequest(request);
-//        CartItem cartItem = cartItemRepository.findByIdAndUser(cartItemId, user);
-//        if(cartItem == null) {
-//            return "index";
-//        } else {
-//            Iterable<CartItem> cartItems = cartItemRepository.findAllByUser(user);
-//            model.addAttribute("cartItems", cartItems);
-//            model.addAttribute("title", "Shopping Cart");
-//            return "redirect:proceedtocheckout";
-//        }
-//    }
-
+    @ResponseBody
     @PostMapping("saveCartItemQty")
     public String saveCartItemQty(HttpServletRequest request, int cartItemId, int qty) throws Exception {
         //TODO: pass in Principal principal instead of getUserFromRequest()?
         User user = getUserFromRequest(request);
         if (user == null) {
-            return "fail sauce"; //TODO: redirect to login
+            return "login required";
         }
         if (qty < 1) {
-            return "fail sauce";
+            return "Invalid quantity";
         }
         //TODO: code for exceptions from db
         CartItem cartItem = cartItemRepository.findByIdAndUser(cartItemId, user);
@@ -136,7 +128,7 @@ public class ShoppingCartController {
             cartItemRepository.save(cartItem);
             return "success";
         } else {
-            return "fail sauce";
+            return "Sorry! Item not found";
         }
     }
 
@@ -144,22 +136,30 @@ public class ShoppingCartController {
     public String displayshippingpayment(HttpServletRequest request, Model model) throws Exception {
         User user = getUserFromRequest(request);
         if (user == null) {
-            return "fail sauce"; //TODO: redirect to login
+            return "login";
         }
         model.addAttribute("title", "ShippingAndPayment");
-        ShippingAndPayment shippingAndPayment = new ShippingAndPayment(user.getFirstname(), user.getLastname(),
-                user.getStreetaddress(), user.getCity(), user.getState(), user.getZipcode(), user.getPhonenumber(),
-                user.getCreditcardnumber(), user.getCardverificationnumber(), user.getExpirationmonth(), user.getExpirationyear());
+//        ShippingAndPayment shippingAndPayment = new ShippingAndPayment(user.getFirstname(), user.getLastname(),
+//                user.getStreetaddress(), user.getCity(), user.getState(), user.getZipcode(), user.getPhonenumber(),
+//                user.getCreditcardnumber(), user.getCardverificationnumber(), user.getExpirationmonth(), user.getExpirationyear());
+//        ShippingAndPayment shippingAndPayment = new ShippingAndPayment(user.getFirstname(), user.getLastname());
         model.addAttribute("shippingAndPayment", new ShippingAndPayment());
         return "shipping&payment";
     }
 
     @PostMapping("proceedtocheckout")
-    public String checkout(@ModelAttribute @Valid ShippingAndPayment newShippingAndPayment,
-                           Errors errors, Model model) {
+    public String checkout(HttpServletRequest request, @ModelAttribute @Valid ShippingAndPayment newShippingAndPayment,
+                           Errors errors, Model model) throws Exception {
+        User user = getUserFromRequest(request);
+        if (user == null) {
+            return "login";
+        }
         if (errors.hasErrors()) {
             model.addAttribute("title", "ShippingAndPayment");
             return "shipping&payment";
+        } else {
+            System.out.println("user.id: " + user.getId());
+            cartItemRepository.deleteAllByUser(user);
         }
         return "thanks";
     }

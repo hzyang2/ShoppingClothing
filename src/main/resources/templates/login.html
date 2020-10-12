@@ -11,25 +11,39 @@
 
     <form method="post" style="margin:100px">
         <div class="form-group">
-            <label style="padding-top:60px;" th:for="username">Username
-                <input class="form-control-username-login" th:field="${loginFormDTO.username}">
-            </label>
-            <p class="error-username-login" th:errors="${loginFormDTO.username}"></p>
+            <div class="val-wrap">
+                <div style="padding-top:60px;" th:for="username">Username</div>
+                <input class="csv form-control-username-login" th:field="${loginFormDTO.username}"/>
+                <p class="error" th:errors="${loginFormDTO.username}"></p>
+            </div>
         </div>
         <div class="form-group">
-            <label>Password
-                <input class="form-control-password-login" th:field="${loginFormDTO.password}" type="password">
-            </label>
-            <p class="error-password-login" th:errors="${loginFormDTO.password}"></p>
+            <div class="val-wrap">
+                <div>Password</div>
+                <input class="csv form-control-password-login" th:field="${loginFormDTO.password}" type="password"/>
+                <p class="error" th:errors="${loginFormDTO.password}"></p>
+            </div>
         </div>
         <input type="submit" class="btn-primary" value="Log In" />
-<!--        <div>-->
-<!--            <p th:text="${loginFormDTO.productId}"></p>-->
-<!--        </div>-->
     </form>
-
     <p style="margin:100px">Don't have an account? <a href="/register">Register for one.</a></p>
-
 </body>
 </html>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+function toggleValidationMsg(evt) {
+    var tgt = evt.target;
+    var pVal = $(evt.target).closest(".val-wrap").find("p.error")
+    if (tgt.value.length > 2 && tgt.value.length < 21) {
+    pVal.hide()
+    } else {
+    pVal.show()
+    }
+}
 
+$(document).ready(function() {
+    //Hide/show validation messages for any input with csv class wrapped in a div val-wrap containing p with error class.
+    $(".csv").keyup(toggleValidationMsg);
+    $(".csv").mouseup(toggleValidationMsg);
+});
+</script>

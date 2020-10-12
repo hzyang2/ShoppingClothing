@@ -1,6 +1,5 @@
 package org.launchcode.shoppingclothing;
 
-
 import org.launchcode.shoppingclothing.controllers.AuthenticationController;
 import org.launchcode.shoppingclothing.models.User;
 import org.launchcode.shoppingclothing.models.data.UserRepository;
@@ -59,5 +58,4 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
         response.sendRedirect("/login/0");
         return false;
     }
-
 }

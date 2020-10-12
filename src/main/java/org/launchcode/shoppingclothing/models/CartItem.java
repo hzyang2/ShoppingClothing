@@ -7,11 +7,11 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class CartItem extends AbstractEntity {
 
-    @ManyToOne //from a list of many users, match one to this CartItem
+    @ManyToOne //from a list of many users, match one user to this CartItem
     @NotNull
     private User user;
 
-    @ManyToOne //from many Products, match one to this CartItem.
+    @ManyToOne //from many Products, match one product to this CartItem.
     @NotNull
     private Product product;
 

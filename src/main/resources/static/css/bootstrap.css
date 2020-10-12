@@ -186,15 +186,11 @@ fieldset[disabled] .btn-primary.focus {
     margin-left: 5px;
 }
 
-.error-shipping {
-    color: red;
-    font-size: 14px;
-    margin-left: 150px;
+.error.shipping {
+    margin-left: 0px;
 }
 
 .error.creditcard {
-    color: red;
-    font-size: 14px;
     margin-left: 200px;
 }
 
@@ -473,11 +469,18 @@ fieldset[disabled] .btn-primary.focus {
 }
 
 .creditcard {
-    font-size: 25px;
-    color: black;
+    font-size: 14px;
+    color: red;
     margin-left: 200px;
     margin-top: 10px;
 }
+
+..creditcardnumber {
+     font-size: 14px;
+     color: red;
+     margin-left: 0px;
+     margin-top: 10px;
+ }
 
 .creditcardaddress {
     display: inline-block;
@@ -509,16 +512,23 @@ fieldset[disabled] .btn-primary.focus {
     margin-top: 10px;
 }
 
+.expirationdate {
+    font-size: 20px;
+    color: black;
+    margin-left: 200px;
+    margin-top: 10px;
+}
+
 .firstnamebox {
     width: 400px;
     height: 30px;
-    margin-left: 150px;
+    margin-left: 0px;
 }
 
 .country {
     width: 200px;
     height: 30px;
-    margin-left: 150px;
+    margin-left: 0px;
 }
 
 .shopping-item {
@@ -549,6 +559,7 @@ fieldset[disabled] .btn-primary.focus {
     margin-left: 200px;
     width: 150px;
     height: 30px;
+    font-size: 20px;
 }
 
 .qty-select {
@@ -563,6 +574,7 @@ fieldset[disabled] .btn-primary.focus {
     margin-left: 3px;
     width: 150px;
     height: 30px;
+    font-size: 20px;
 }
 
 .creditcardtype-item {
@@ -594,7 +606,7 @@ fieldset[disabled] .btn-primary.focus {
 .creditcardnumberbox {
     width: 500px;
     height: 30px;
-    margin-left: 200px;
+    margin-left: 0px;
 }
 
 .expirationdate-item {

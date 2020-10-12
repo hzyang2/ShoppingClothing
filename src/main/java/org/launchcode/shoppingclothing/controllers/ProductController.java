@@ -64,13 +64,7 @@ public class ProductController {
         return "index";
     }
 
-//    @RequestMapping("searchresult")
-//    public String searchbox(Model model) {
-//        model.addAttribute("title", "Search Box");
-//        return "searchresult";
-//    }
-
-    @PostMapping("fragments") //Luke made For search box
+    @PostMapping("doSearch") //Luke made For search box
         public String search(Model model, @RequestParam String search) {
         Iterable<Product> products = productRepository.findBySearchText(search);
         // get the products and pass it to the front-end
@@ -95,22 +89,4 @@ public class ProductController {
         model.addAttribute("product", product);
         return "product";
     }
-
-//    @PostMapping ("product/{id}")
-//    public String displayShoppintcartProduct(Model model, @PathVariable int id) {
-//        // get optProduct by id from database
-//        Optional<Product> optProduct = productRepository.findById(id);
-//
-//        // return to different page if id doesn't exist in database
-//        if( optProduct == null) {
-//            //return to some other page. Select whatever you want.
-//            return "redirect:man";
-//        }
-//
-//        // get the product and pass it to the front-end
-//        Product product = optProduct.get();
-//        model.addAttribute("product", product);
-//        return "redirect:shoppingcart";
-//    }
-
 }

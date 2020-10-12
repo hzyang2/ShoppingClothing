@@ -11,8 +11,6 @@
     <h2 style="margin:50px">Item</h2>
 
     <form method="post" th:href="@{/proceedtocheckout}">
-<!--        <form method="post" action="shoppingcart">-->
-
         <div class="grid a">
             <table>
                 <tr th:each="cartItem : ${cartItems}">
@@ -39,11 +37,9 @@
                         <p style="margin-top:20px">
                             $<span class="xprice" th:data-cartitemid="${cartItem.id}" th:text="${cartItem.product.price*cartItem.qty}"></span>
                         </p>
-                        <form class="btn-primary-delete">
-                            <a th:href="${'/deleteItem/' + cartItem.id}">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </form>
+                        <div class="deleteItem" th:data-cartitemid="${cartItem.id}">
+                                <i  class="fa fa-trash"></i>
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -76,23 +72,38 @@
         </div>
     </form>
     <script>
-$(document).ready(calculateSum);
+$(document).ready(function() {
+    $("input[data-cartitemid]").change()
+});
 
 $("input[data-cartitemid]").change(function() {
     var cartItemId = $(this).data("cartitemid")
     var price = parseFloat($('span.price[data-cartitemid="' + cartItemId + '"]')[0].innerText)
     var qty = this.value
+    //If users enter a negative or decimal value, we only accept a positive integer.
     qty = Math.abs(Number.parseInt(qty))
-    // var xprice = numberWithCommas(price * qty)
+    this.value = qty
     var xprice = price * qty
-    $('span.xprice[data-cartitemid="' + cartItemId + '"]')[0].innerText = xprice
+    //var xprice = (price * qty).toFixed(2)
+    $('span.xprice[data-cartitemid="' + cartItemId + '"]')[0].innerText = Math.round(xprice*100)/100
+
     var dataToSave = { cartItemId: cartItemId, qty: qty }
     $.post("/saveCartItemQty", dataToSave, doneSavingChanges)
     calculateSum()
 });
 
+<!--function fmtCurrency(value) {-->
+<!--    var thousands = Math.floor(value/1000)-->
+<!--    var thouPreix = thousands > 0 ? thousands + "," : ""-->
+<!--    var valueUnder1000 = value % 1000-->
+<!--    var integersUnder1000 = Math.round(valueUnder1000*100)/100-->
+<!--    console.log(integersUnder1000)-->
+<!--    var paddedIntegersUnder1000 =  (integersUnder1000 + "").padStart(3, "0")-->
+<!--    return thouPreix + paddedIntegersUnder1000-->
+<!--}-->
+
 function doneSavingChanges(result) {
-    alert(result)
+    //alert(result)
     console.log (result)
 }
 
@@ -105,9 +116,13 @@ function calculateSum() {
             subtotal += parseFloat(this.innerText);
         }
     });
+    if (subtotal == 0) {
+       alert("There is no item in the shopping cart. Navigate into homepage.")
+       window.location = "/";
+    }
     $('#result').text(numberWithCommas(subtotal));
     var shippingPriceOne = parseFloat($('#shippingPrice').text());
-    var grandTotal = subtotal + shippingPriceOne
+    var grandTotal = subtotal + shippingPriceOne;
     $('#grandTotal').text(numberWithCommas(grandTotal));
 }
 
@@ -115,6 +130,21 @@ function numberWithCommas(number) {
     var parts = parseFloat(number).toFixed(2).toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return parts.join(".");
+}
+
+$(".deleteItem").click(function() {
+    var cartItemId = $(this).data("cartitemid");
+    var response = confirm('Are you sure you want to delete this item from your shopping cart?');
+    $.post("/deleteItem", { cartItemId: cartItemId }, doneDeletingItem);
+    //window.location = "shoppingcart";
+});
+
+function doneDeletingItem(result) {
+    if (result == "success") {
+        $(".fa-shopping-cart").click();
+    } else {
+        alert(result);
+    }
 }
     </script>
 </body>

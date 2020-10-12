@@ -87,46 +87,36 @@ public class AuthenticationController {
             return "register";
         }
 
+//        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getEmail(),
+//                                registerFormDTO.getFirstname(), registerFormDTO.getLastname(), registerFormDTO.getStreetaddress(),
+//                                registerFormDTO.getCity(), registerFormDTO.getZipcode(), registerFormDTO.getZipcode(), registerFormDTO.getPhonenumber(),
+//                                registerFormDTO.getCreditcardnumber(), registerFormDTO.getCardverificationnumber(), registerFormDTO.getExpirationmonth(), registerFormDTO.getExpirationyear());
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getEmail(),
-                                registerFormDTO.getFirstname(), registerFormDTO.getLastname(), registerFormDTO.getStreetaddress(),
-                                registerFormDTO.getCity(), registerFormDTO.getZipcode(), registerFormDTO.getZipcode(), registerFormDTO.getPhonenumber(),
-                                registerFormDTO.getCreditcardnumber(), registerFormDTO.getCardverificationnumber(), registerFormDTO.getExpirationmonth(), registerFormDTO.getExpirationyear());
+                registerFormDTO.getFirstname(), registerFormDTO.getLastname());
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
 
         return "redirect:";
     }
 
-    @GetMapping("/login") //*** Site should support normal login without unauthenticated Add to Cart.
-    public String displayLoginForm(Model model) {
-        return displayLoginForm(model, 0);
-    }
-
-    @GetMapping("/login/{productId}")
-    public String displayLoginForm(Model model, @PathVariable int productId) {
-        model.addAttribute(new LoginFormDTO(productId));
+    @GetMapping({"/login", "/login/{optionalProductId}"})
+    public String displayLoginForm(Model model, @PathVariable Optional<Integer> optionalProductId) {
+        model.addAttribute(new LoginFormDTO());
         model.addAttribute("title", "Log In");
         return "login";
     }
 
-    @PostMapping("/login")
-    public String processLoginForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
-                                   Errors errors, HttpServletRequest request,
-                                   Model model) {
-        return processLoginForm(loginFormDTO, errors, request, model,0);
-    }
 
-    @PostMapping("/login/{productId}")
+    @PostMapping({"/login", "/login/{optionalProductId}"})
     public String processLoginForm(@ModelAttribute @Valid LoginFormDTO loginFormDTO,
                                    Errors errors, HttpServletRequest request,
-                                   Model model, @PathVariable int productId) {
+                                   Model model, @PathVariable Optional<Integer> optionalProductId) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Log In");
             return "login";
         }
 
         User theUser = userRepository.findByUsername(loginFormDTO.getUsername());
-
         if (theUser == null) {
             errors.rejectValue("username", "user.invalid", "The given username does not exist");
             model.addAttribute("title", "Log In");
@@ -134,7 +124,6 @@ public class AuthenticationController {
         }
 
         String password = loginFormDTO.getPassword();
-
         if (!theUser.isMatchingPassword(password)) {
             errors.rejectValue("password", "password.invalid", "Invalid password");
             model.addAttribute("title", "Log In");
@@ -143,8 +132,10 @@ public class AuthenticationController {
 
         setUserInSession(request.getSession(), theUser);
 
-        var prodId = loginFormDTO.getProductId();
-        return (prodId > 0) ? "redirect:/AddToCart/" + prodId : "redirect:/";
+        if (optionalProductId.isPresent()) { //In case users select product before logging in, keep id selected and add after login.
+            return "redirect:/addtocart/" + optionalProductId.get();
+        }
+        return "redirect:/";
     }
 
     @GetMapping("/logout")

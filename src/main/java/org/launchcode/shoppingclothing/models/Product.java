@@ -15,8 +15,6 @@ public class Product extends AbstractEntity {
 
     private String size;
 
-//    private BigDecimal price;
-
     private Double price;
 
     public Product() {

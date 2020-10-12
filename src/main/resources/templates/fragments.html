@@ -8,14 +8,11 @@
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!--    <link rel="icon" href="images/favicon.png"/>-->
 
     <title th:text="'Shoppingclothing' + ${title == null ? '' : ' :: ' + title}">Shopping Clothing</title>
 </head>
 
 <body>
-
-<!--<div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">-->
     <div th:fragment="page-header">
         <div style="margin-left:50px">
             <a th:href="@{/}" ><strong>Shopping</strong><em>Clothing</em></a>
@@ -32,33 +29,16 @@
             </div>
         </div>
         <div>
-<!--            <input type="text" name="name" placeholder="Type to search" style="margin-left:1000px" class="searchbox"/>-->
-<!--            <a type="submit" th:href="@{/searchbtn}" class="searchicon">-->
-<!--                <i class="fa fa-search"></i>-->
-<!--            </a>-->
             <div class="search-item a">
-                <form class="example" method="post" th:href="@{/searchresult}" action="/fragments">
+                <form class="example" method="post" action="/doSearch">
                     <input class="example-one" type="text" placeholder="Type to search" name="search" id="search">
                     <button class="example-two" type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </div>
-<!--            <script>-->
-<!--$("button[type='submit']").click(function() {-->
-<!--    //var searchText = $("#search")[0].value-->
-<!--    $.post("/product/search", { searchText: $("#search")[0].value }, doneSearching)-->
-<!--});-->
-
-<!--function doneSearching(data) {-->
-<!--    console.log(data);-->
-<!--}-->
-<!--            </script>-->
             <div class="search-item b">
                 <a th:href="@{/shoppingcart}">
                     <i class="fa fa-shopping-cart" style="font-size:36px; margin:10px"></i>
                 </a>
-<!--                <a th:href="@{/logout}" title="Logout">-->
-<!--                    <i class="fa fa-user icon" style="font-size:36px; margin:10px"></i>-->
-<!--                </a>-->
                 <a th:href="@{/login}">
                     <i class="fa fa-user icon" style="font-size:36px; margin:10px"></i>
                 </a>
@@ -68,8 +48,6 @@
     </div>
 <div th:fragment="yang">
     <div class="product-item a">
-        <!--            th:each="product : ${products}">  /*th:each="product : ${products}"*/-->
-        <!--            <img src="/image/man/man111.jpg" style="width:500px;height:300px; margin-left:190px">-->
         <img th:src="${'/image/' + product.product_line + '/' + product.image_file_name}" style="width:500px;height:300px; margin-left:190px">
     </div>
     <div class="product-item b">

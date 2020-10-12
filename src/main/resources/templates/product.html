@@ -13,7 +13,6 @@
             <img th:src="${'/image/' + product.product_line + '/' + product.image_file_name}" class="product-item-image">
         </div>
         <div class="product-item b">
-<!--            th:each="product : ${products}">-->
             <div th:text="${'Brand: ' + product.brand}"></div>
             <div th:text="${'Category: ' + product.category}"></div>
             <div th:text="${'Size: ' + product.size}"></div>
@@ -21,9 +20,6 @@
         </div>
         <div style="margin-left:1200px;">
            <a class="btn btn-primary" th:href="${'/addtocart/' + product.id}">Add to Cart</a>
-<!--            <form method="post">-->
-<!--                <input type="submit" class="btn-primary-checkout" value="Add to Cart" />-->
-<!--            </form>-->
         </div>
 </div>
 </body>

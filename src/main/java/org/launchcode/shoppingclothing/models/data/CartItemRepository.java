@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface CartItemRepository extends CrudRepository<CartItem, Integer> {
     Iterable<CartItem> findAllByUser(User user);
     CartItem findByIdAndUser(int cartItemId, User user);
+    void deleteAllByUser(User user);
 }
