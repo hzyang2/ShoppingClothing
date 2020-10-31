@@ -61,7 +61,7 @@ public class ShoppingCartController {
                 return "redirect:/login/" + productId;
             newCartItem.setUser(user);
             cartItemRepository.save(newCartItem);
-            return viewCart(request, model);
+            return "redirect:/shoppingcart/";
         } else {
             model.addAttribute("error", "Invalid Product ID");
             return ""; //TODO: return to the same page
@@ -126,7 +126,7 @@ public class ShoppingCartController {
         if (cartItem != null ) {
             cartItem.setQty(qty);
             cartItemRepository.save(cartItem);
-            return "success";
+            return "success (qty changed)";
         } else {
             return "Sorry! Item not found";
         }
@@ -139,10 +139,6 @@ public class ShoppingCartController {
             return "login";
         }
         model.addAttribute("title", "ShippingAndPayment");
-//        ShippingAndPayment shippingAndPayment = new ShippingAndPayment(user.getFirstname(), user.getLastname(),
-//                user.getStreetaddress(), user.getCity(), user.getState(), user.getZipcode(), user.getPhonenumber(),
-//                user.getCreditcardnumber(), user.getCardverificationnumber(), user.getExpirationmonth(), user.getExpirationyear());
-//        ShippingAndPayment shippingAndPayment = new ShippingAndPayment(user.getFirstname(), user.getLastname());
         model.addAttribute("shippingAndPayment", new ShippingAndPayment());
         return "shipping&payment";
     }

@@ -87,10 +87,6 @@ public class AuthenticationController {
             return "register";
         }
 
-//        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getEmail(),
-//                                registerFormDTO.getFirstname(), registerFormDTO.getLastname(), registerFormDTO.getStreetaddress(),
-//                                registerFormDTO.getCity(), registerFormDTO.getZipcode(), registerFormDTO.getZipcode(), registerFormDTO.getPhonenumber(),
-//                                registerFormDTO.getCreditcardnumber(), registerFormDTO.getCardverificationnumber(), registerFormDTO.getExpirationmonth(), registerFormDTO.getExpirationyear());
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getEmail(),
                 registerFormDTO.getFirstname(), registerFormDTO.getLastname());
         userRepository.save(newUser);

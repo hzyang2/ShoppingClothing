@@ -9,6 +9,7 @@
 <div th:replace="fragments :: page-header"></div>
 
 <div class="body-content">
+    <div th:each="product : ${products}">
         <div class="product-item a">
             <img th:src="${'/image/' + product.product_line + '/' + product.image_file_name}" class="product-item-image">
         </div>
@@ -19,8 +20,9 @@
             <div th:text="${'Price: $' + product.price}"></div>
         </div>
         <div style="margin-left:1200px;">
-           <a class="btn btn-primary" th:href="${'/addtocart/' + product.id}">Add to Cart</a>
+            <a class="btn btn-primary" th:href="${'/addtocart/' + product.id}">Add to Cart</a>
         </div>
+    </div>
 </div>
 </body>
 </html>

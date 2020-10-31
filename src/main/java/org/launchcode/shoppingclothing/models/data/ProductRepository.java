@@ -12,4 +12,6 @@ import javax.transaction.Transactional;
 public interface ProductRepository extends CrudRepository<Product, Integer> {
     @Query(value = "SELECT * FROM shoppingclothing.product where category = ?1 or brand = ?1 or product_line = ?1 or size = ?1" , nativeQuery = true)
     Iterable<Product> findBySearchText(String search);
+    @Query(value = "SELECT * FROM shoppingclothing.product where product_line = ?1 and category = ?2" , nativeQuery = true)
+    Iterable<Product> findByProduct_lineAndCategory(String product_line, String category);
 }

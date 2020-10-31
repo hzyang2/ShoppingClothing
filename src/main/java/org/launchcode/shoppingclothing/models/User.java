@@ -25,7 +25,8 @@ public class User extends AbstractEntity {
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public User() {}
+    public User() {
+    } //hibernate requires default constructor(ctor).
 
     public boolean isMatchingPassword(String password) {
         return encoder.matches(password, pwHash);
@@ -37,49 +38,5 @@ public class User extends AbstractEntity {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPwHash() {
-        return pwHash;
-    }
-
-    public void setPwHash(String pwHash) {
-        this.pwHash = pwHash;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public static BCryptPasswordEncoder getEncoder() {
-        return encoder;
     }
 }

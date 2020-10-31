@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Optional;
-
 @Controller
 public class ProductController {
 
@@ -64,7 +62,7 @@ public class ProductController {
         return "index";
     }
 
-    @PostMapping("doSearch") //Luke made For search box
+    @PostMapping("doSearch")
         public String search(Model model, @RequestParam String search) {
         Iterable<Product> products = productRepository.findBySearchText(search);
         // get the products and pass it to the front-end
@@ -73,20 +71,10 @@ public class ProductController {
         return "searchresult";
     }
 
-    @RequestMapping("product/{id}")
-    public String displayProduct(Model model, @PathVariable int id) {
-        // get optProduct by id from database
-        Optional<Product> optProduct = productRepository.findById(id);
-
-        // return to different page if id doesn't exist in database
-        if( optProduct == null) {
-            //return to some other page. Select whatever you want.
-            return "redirect:man";
-        }
-
-        // get the product and pass it to the front-end
-        Product product = optProduct.get();
-        model.addAttribute("product", product);
+    @RequestMapping("product/{product_line}/{category}")
+    public String displayProductCategory(Model model, @PathVariable String product_line, @PathVariable String category) {
+        Iterable<Product> products = productRepository.findByProduct_lineAndCategory(product_line, category);
+        model.addAttribute("products", products);
         return "product";
     }
 }
